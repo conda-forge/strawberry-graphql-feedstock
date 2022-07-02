@@ -1,5 +1,5 @@
 {% set name = "strawberry-graphql" %}
-{% set version = "0.114.5" %}
+{% set version = "0.115.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/strawberry-graphql-{{ version }}.tar.gz
-  sha256: b6e007281cf29a66eeba66a512744853d8aa53b4ca2525befb6f350bb7b24df6
+  sha256: cd58d04908ef68b90f6cc0ecf5786ed48165aed7ba55f9ba9db3c032f02ba163
 
 build:
   entry_points:
