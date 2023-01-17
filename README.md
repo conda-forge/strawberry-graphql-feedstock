@@ -148,4 +148,5 @@ Feedstock Maintainers
 =====================
 
 * [@cshaley](https://github.com/cshaley/)
+* [@thewchan](https://github.com/thewchan/)
 
