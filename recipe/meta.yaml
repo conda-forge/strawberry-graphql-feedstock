@@ -1,13 +1,13 @@
 {% set name = "strawberry-graphql" %}
-{% set version = "0.125.0" %}
+{% set version = "0.146.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/strawberry-graphql-{{ version }}.tar.gz
-  sha256: ffc570a79a9b09fa95eea4b59557cb792606ac3dcee7f6276e1e68d5a2e5400a
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/strawberry_graphql-{{ version }}.tar.gz
+  sha256: bfea6b0b873e3365a1a47c30f577f21be4c2eb40dd0e62ece840d5c44525230a
 
 build:
   entry_points:
@@ -22,13 +22,15 @@ requirements:
     - python >=3.7
     - poetry >=0.12
   run:
-    - backports.cached-property >=1.0.1,<2.0.0
+    - backports.cached-property >=1.0.2,<2.0.0
     - click >=7.0,<9.0
     - graphql-core >=3.2.0,<3.3.0
+    - libcst >=0.4.7
     - pygments >=2.3,<3.0
     - python >=3.7
     - python-dateutil >=2.7.0,<3.0.0
     - python-multipart >=0.0.5,<0.0.6
+    - rich >=12.0.0
     - typing_extensions >=3.7.4,<5.0.0
 
 test:
@@ -51,3 +53,4 @@ about:
 extra:
   recipe-maintainers:
     - cshaley
+    - thewchan
