@@ -31,7 +31,9 @@ requirements:
     - python-dateutil >=2.7.0,<3.0.0
     - python-multipart >=0.0.5,<0.0.6
     - rich >=12.0.0
+    - starlette >=0.13.6
     - typing_extensions >=3.7.4,<5.0.0
+    - uvicorn >=0.11.6,<0.21.
 
 test:
   imports:
@@ -47,7 +49,7 @@ about:
   summary: A library for creating GraphQL APIs
   license: MIT
   license_file: LICENSE
-  dev_url: https://github.com/strawberry-graphql/strawberr
+  dev_url: https://github.com/strawberry-graphql/strawberry
   doc_url: https://strawberry.rocks/docs
 
 extra:
