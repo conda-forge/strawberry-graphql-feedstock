@@ -9,7 +9,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/strawberry-grap
 
 Summary: A library for creating GraphQL APIs
 
-Development: https://github.com/strawberry-graphql/strawberr
+Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
 
