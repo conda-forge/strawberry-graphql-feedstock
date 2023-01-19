@@ -33,7 +33,7 @@ requirements:
     - rich >=12.0.0
     - starlette >=0.13.6
     - typing_extensions >=3.7.4,<5.0.0
-    - uvicorn >=0.11.6,<0.21.
+    - uvicorn >=0.11.6,<0.21.0
 
 test:
   imports:
