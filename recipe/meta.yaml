@@ -25,15 +25,6 @@ requirements:
   run:
     - python {{ min_python }}
 
-test:
-  files:
-    - update_recipe.py
-  requires:
-    - jinja2
-    - tomli
-  commands:
-    - python update_recipe.py --check
-
 outputs:
   - name: strawberry-graphql
     build:
@@ -55,12 +46,18 @@ outputs:
         - python-dateutil 2.*
         - typing_extensions >=3.7.4,<5.0.0
     test:
+      files:
+        - meta.yaml
+        - update_recipe.py
       imports:
         - strawberry
       commands:
         - pip check
+        - python update_recipe.py --check
       requires:
+        - jinja2
         - pip
+        - tomli
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs
