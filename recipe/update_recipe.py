@@ -22,6 +22,7 @@ to update those fields in `meta.yaml`.
 If some underlying project data changed e.g. the `path_to-the_tarball`, update
 `meta.j2.yaml` and re-run.
 """
+import os
 import re
 import sys
 import tempfile
@@ -42,17 +43,29 @@ DELIMIT = dict(
 )
 DEV_URL = "https://github.com/strawberry-graphql/strawberry"
 
-PKG_MAP = {}
-
+#: assume running locally
 HERE = Path(__file__).parent
-TMPL = [*HERE.glob("*.j2.*")]
-META = HERE / "meta.yaml"
+WORK_DIR = HERE
+SRC_DIR = Path(os.environ["SRC_DIR"]) if "SRC_DIR" in os.environ else None
+
+#: assume inside conda-build
+if "RECIPE_DIR" in os.environ:
+    WORK_DIR = Path(os.environ["RECIPE_DIR"])
+
+TMPL = [*WORK_DIR.glob("*.j2.*")]
+META = WORK_DIR / "meta.yaml"
 CURRENT_META_TEXT = META.read_text(encoding="utf-8")
 
 #: read the version from what the bot might have updated
-VERSION = re.findall(r'set version = "([^"]*)"', CURRENT_META_TEXT)[0].strip()
-SHA256_SUM = re.findall(r"sha256: ([\S]*)", CURRENT_META_TEXT)[0].strip()
-BUILD_NUMBER = re.findall(r"number: ([\S]*)", CURRENT_META_TEXT)[0].strip()
+try:
+    VERSION = re.findall(r'set version = "([^"]*)"', CURRENT_META_TEXT)[0].strip()
+    SHA256_SUM = re.findall(r"sha256: ([\S]*)", CURRENT_META_TEXT)[0].strip()
+    BUILD_NUMBER = re.findall(r"number: ([\S]*)", CURRENT_META_TEXT)[0].strip()
+except Exception as err:
+    print(CURRENT_META_TEXT)
+    print(f"failed to find version info in above {META}")
+    print(err)
+    sys.exit(1)
 
 #: instead of cloning the whole repo, just download tarball
 TARBALL_URL = f"{DEV_URL}/archive/refs/tags/{VERSION}.tar.gz"
@@ -132,7 +145,11 @@ def preflight_recipe():
 
 def get_pyproject_data():
     """fetch the pyproject.toml data"""
-    print(f"fetching {TARBALL_URL}...")
+    if SRC_DIR:
+        print(f"reading pyprojec.toml from {TARBALL_URL}...")
+        return tomli.load((SRC_DIR / "pyproject.toml").read_bytes())
+
+    print(f"reading pyproject.toml from {TARBALL_URL}...")
     with tempfile.TemporaryDirectory() as td:
         tdp = Path(td)
         tarpath = tdp / Path(TARBALL_URL).name
