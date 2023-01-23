@@ -48,6 +48,7 @@ outputs:
     test:
       files:
         - meta.yaml
+        - meta.j2.yaml
         - update_recipe.py
       imports:
         - strawberry
