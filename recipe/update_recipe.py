@@ -147,7 +147,7 @@ def get_pyproject_data():
     """fetch the pyproject.toml data"""
     if SRC_DIR:
         print(f"reading pyprojec.toml from {TARBALL_URL}...")
-        return tomli.load((SRC_DIR / "pyproject.toml").read_bytes())
+        return tomli.loads((SRC_DIR / "pyproject.toml").read_text(encoding="utf-8"))
 
     print(f"reading pyproject.toml from {TARBALL_URL}...")
     with tempfile.TemporaryDirectory() as td:
