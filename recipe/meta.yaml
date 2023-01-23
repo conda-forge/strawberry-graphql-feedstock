@@ -1,51 +1,444 @@
-{% set name = "strawberry-graphql" %}
+# the version gets updated by the bot
 {% set version = "0.155.0" %}
 
+# this changes infrequently-enough that it is manually updated
+{% set min_python = ">=3.7" %}
+
 package:
-  name: {{ name|lower }}
+  name: strawberry-graphql-split
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/strawberry_graphql-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
+  # the SHA256 gets updated by the bot
   sha256: 9045e8ac02a13b76401e8e451f43ff430af6e3713bb45ca41d43c41bdbe8e791
 
 build:
-  entry_points:
-    - strawberry = strawberry.cli:run
+  # the build number gets reset by the bot
+  number: 1
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
 
 requirements:
   host:
     - pip
-    - python >=3.7
-    - poetry >=0.12
+    - python {{ min_python }}
   run:
-    - backports.cached-property >=1.0.2,<2.0.0
-    - click >=7.0,<9.0
-    - graphql-core >=3.2.0,<3.3.0
-    - libcst >=0.4.7
-    - pygments >=2.3,<3.0
-    - python >=3.7
-    - python-dateutil >=2.7.0,<3.0.0
-    - python-multipart >=0.0.5,<0.0.6
-    - rich >=12.0.0
-    - starlette >=0.13.6
-    - typing_extensions >=3.7.4,<5.0.0
-    - uvicorn >=0.11.6,<0.21.0
+    - python {{ min_python }}
 
 test:
-  imports:
-    - strawberry
-  commands:
-    - pip check
-    - strawberry --help
+  files:
+    - update_recipe.py
   requires:
-    - pip
+    - jinja2
+    - tomli
+  commands:
+    - python update_recipe.py --check
+
+outputs:
+  - name: strawberry-graphql
+    build:
+      noarch: python
+      script:
+        # prefer poetry-generated setup.py
+        - {{ PYTHON }} -c "__import__('pathlib').Path('pyproject.toml').unlink()"
+        - {{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed
+      entry_points:
+        - strawberry = strawberry.cli:run
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - backports.cached-property 1.*
+        - graphql-core 3.2.*
+        - python-dateutil 2.*
+        - typing_extensions >=3.7.4,<5.0.0
+    test:
+      imports:
+        - strawberry
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-aiohttp
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - aiohttp 3.*
+    test:
+      imports:
+        - strawberry
+        - strawberry.aiohttp
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with aiohttp)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-asgi
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - python-multipart 0.*
+        - starlette >=0.13.6
+    test:
+      imports:
+        - strawberry
+        - strawberry.asgi
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with asgi)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-debug
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - libcst >=0.4.7
+        - rich >=12.0.0
+    test:
+      imports:
+        - strawberry
+        # TODO: import test for debug
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with debug)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-debug-server
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - click >=7.0,<9.0
+        - libcst >=0.4.7
+        - pygments 2.*
+        - python-multipart 0.*
+        - rich >=12.0.0
+        - starlette >=0.13.6
+        - uvicorn >=0.11.6,<0.21.0
+    test:
+      imports:
+        - strawberry
+        # TODO: import test for debug-server
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with debug-server)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-django
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - asgiref 3.*
+        - django >=3.2
+    test:
+      imports:
+        - strawberry
+        - strawberry.django
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with django)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-channels
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - asgiref 3.*
+        - channels >=3.0.5
+    test:
+      imports:
+        - strawberry
+        - strawberry.channels
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with channels)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-flask
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - flask >=1.1
+    test:
+      imports:
+        - strawberry
+        - strawberry.flask
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with flask)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-opentelemetry
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - opentelemetry-api <2
+        - opentelemetry-sdk <2
+    test:
+      imports:
+        - strawberry
+        - strawberry.extensions.tracing
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with opentelemetry)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-pydantic
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - pydantic <2
+    test:
+      imports:
+        - strawberry
+        - strawberry.experimental.pydantic
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with pydantic)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-sanic
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - sanic >=20.12.2
+    test:
+      imports:
+        - strawberry
+        - strawberry.sanic
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with sanic)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-fastapi
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - fastapi >=0.65.2
+        - python-multipart 0.*
+    test:
+      imports:
+        - strawberry
+        - strawberry.fastapi
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with fastapi)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-chalice
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - chalice 1.*
+    test:
+      imports:
+        - strawberry
+        - strawberry.chalice
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with chalice)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-cli
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python {{ min_python }}
+      run:
+        - python {{ min_python }}
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - click >=7.0,<9.0
+        - libcst >=0.4.7
+        - pygments 2.*
+        - rich >=12.0.0
+    test:
+      imports:
+        - strawberry
+        - strawberry.cli
+      commands:
+        - pip check
+        - strawberry --help
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with cli)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
 
 about:
-  home: https://strawberry.rocks/
+  home: https://strawberry.rocks
   summary: A library for creating GraphQL APIs
   license: MIT
   license_file: LICENSE
@@ -53,6 +446,8 @@ about:
   doc_url: https://strawberry.rocks/docs
 
 extra:
+  feedstock-name: strawberry-graphql
   recipe-maintainers:
     - cshaley
     - thewchan
+    - bollwyvl
