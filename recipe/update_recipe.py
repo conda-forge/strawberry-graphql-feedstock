@@ -3,6 +3,8 @@
 Invoke this locally from the root of the feedstock, assuming `tomli` and `jinja2`:
 
     python recipe/update_recipe.py
+    git commit -m "updated recipe with update script"
+    conda smithy rerender
 
 The optional `--check` parameter will fail if new `[extra]`s are added, or
 dependencies change.
