@@ -30,6 +30,7 @@ outputs:
     build:
       noarch: python
       script:
+        - {{ PYTHON }} {{ RECIPE_DIR }}/update_recipe.py --check
         # prefer poetry-generated setup.py
         - {{ PYTHON }} -c "__import__('pathlib').Path('pyproject.toml').unlink()"
         - {{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed
@@ -39,24 +40,19 @@ outputs:
       host:
         - pip
         - python {{ min_python }}
+        - tomli
+        - jinja2
       run:
         - python {{ min_python }}<% for dep in core_deps %>
         - << dep >>
         <%- endfor %>
     test:
-      files:
-        - meta.j2.yaml
-        - meta.yaml
-        - update_recipe.py
       imports:
         - strawberry
       commands:
         - pip check
-        - python update_recipe.py --check
       requires:
-        - jinja2
         - pip
-        - tomli
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs
