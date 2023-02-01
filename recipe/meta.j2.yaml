@@ -1,8 +1,6 @@
+{% set min_python = ">=3.7" %}
 # the version gets updated by the bot
 {% set version = "<< version >>" %}
-
-# this changes infrequently-enough that it is manually updated
-{% set min_python = ">=3.7" %}
 
 package:
   name: strawberry-graphql-split
