@@ -1,5 +1,4 @@
 {% set min_python = ">=3.7" %}
-{% set min_python = ">=3.7" %}
 # the version gets updated by the bot
 {% set version = "0.155.4" %}
 
