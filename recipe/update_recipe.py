@@ -55,6 +55,7 @@ if "RECIPE_DIR" in os.environ:
 TMPL = [*WORK_DIR.glob("*.j2.*")]
 META = WORK_DIR / "meta.yaml"
 CURRENT_META_TEXT = META.read_text(encoding="utf-8")
+MIN_PYTHON = ">=3.7"
 
 #: read the version from what the bot might have updated
 try:
@@ -181,6 +182,7 @@ def update_recipe(check=False):
         core_deps=core_deps,
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
+        min_python=MIN_PYTHON
     )
 
     for tmpl_path in TMPL:

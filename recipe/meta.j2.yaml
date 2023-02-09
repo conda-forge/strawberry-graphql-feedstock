@@ -1,5 +1,3 @@
-{% set min_python = ">=3.7" %}
-# the version gets updated by the bot
 {% set version = "<< version >>" %}
 
 package:
@@ -19,9 +17,9 @@ build:
 requirements:
   host:
     - pip
-    - python {{ min_python }}
+    - python << min_python >>
   run:
-    - python {{ min_python }}
+    - python << min_python >>
 
 outputs:
   - name: strawberry-graphql
@@ -37,11 +35,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python {{ min_python }}
+        - python << min_python >>
         - tomli
         - jinja2
       run:
-        - python {{ min_python }}<% for dep in core_deps %>
+        - python << min_python >><% for dep in core_deps %>
         - << dep >>
         <%- endfor %>
     test:
@@ -65,9 +63,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python {{ min_python }}
+        - python << min_python >>
       run:
-        - python {{ min_python }}
+        - python << min_python >>
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}<% for dep in extra_deps %>
         - << dep >>
         <%- endfor %>
