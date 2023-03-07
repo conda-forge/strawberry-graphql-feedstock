@@ -1,13 +1,172 @@
+About strawberry-graphql-feedstock
+==================================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/strawberry-graphql-feedstock/blob/main/LICENSE.txt)
+
 About strawberry-graphql
-========================
+------------------------
 
 Home: https://strawberry.rocks
 
 Package license: MIT
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/strawberry-graphql-feedstock/blob/main/LICENSE.txt)
-
 Summary: A library for creating GraphQL APIs
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-aiohttp
+-------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with aiohttp)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-asgi
+----------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with asgi)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-chalice
+-------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with chalice)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-channels
+--------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with channels)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-cli
+---------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with cli)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-debug
+-----------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with debug)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-debug-server
+------------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with debug-server)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-django
+------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with django)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-fastapi
+-------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with fastapi)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-flask
+-----------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with flask)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-opentelemetry
+-------------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with opentelemetry)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-pydantic
+--------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with pydantic)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-sanic
+-----------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with sanic)
 
 Development: https://github.com/strawberry-graphql/strawberry
 
