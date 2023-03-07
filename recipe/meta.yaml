@@ -27,17 +27,16 @@ outputs:
       noarch: python
       script:
         - {{ PYTHON }} {{ RECIPE_DIR }}/update_recipe.py --check
-        # prefer poetry-generated setup.py
-        - {{ PYTHON }} -c "__import__('pathlib').Path('pyproject.toml').unlink()"
-        - {{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed
+        - {{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed --no-build-isolation
       entry_points:
         - strawberry = strawberry.cli:run
     requirements:
       host:
+        - jinja2
         - pip
+        - poetry >=0.12
         - python >=3.7
         - tomli
-        - jinja2
       run:
         - python >=3.7
         - backports.cached-property 1.*
