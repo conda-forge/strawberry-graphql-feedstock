@@ -155,7 +155,7 @@ outputs:
         - click >=7.0,<9.0
         - libcst >=0.4.7
         - pygments 2.*
-        - python-multipart 0.*
+        - python-multipart >=0.0.5,<0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
         - uvicorn >=0.11.6,<0.22.0
