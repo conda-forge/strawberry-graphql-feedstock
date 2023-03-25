@@ -1,4 +1,4 @@
-{% set version = "0.165.1" %}
+{% set version = "0.166.0" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: cc61712ac914431bb019e654784791a5ce62a16216935fc4e6f82eda4e7f0559
+  sha256: ec122e806d7ee1b5867fb137e2b71ebf5c644b33f63f18b1acf645cc1d919d8f
 
 build:
   # the build number gets reset by the bot
@@ -96,7 +96,7 @@ outputs:
       run:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - python-multipart 0.*
+        - python-multipart >=0.0.5,<0.0.7
         - starlette >=0.18.0
     test:
       imports:
@@ -155,7 +155,7 @@ outputs:
         - click >=7.0,<9.0
         - libcst >=0.4.7
         - pygments 2.*
-        - python-multipart 0.*
+        - python-multipart >=0.0.5,<0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
         - uvicorn >=0.11.6,<0.22.0
@@ -351,7 +351,7 @@ outputs:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - fastapi >=0.65.2
-        - python-multipart 0.*
+        - python-multipart >=0.0.5,<0.0.7
     test:
       imports:
         - strawberry
