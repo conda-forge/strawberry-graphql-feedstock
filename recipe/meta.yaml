@@ -96,7 +96,7 @@ outputs:
       run:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - python-multipart 0.*
+        - python-multipart >=0.0.5,<0.0.7
         - starlette >=0.18.0
     test:
       imports:
