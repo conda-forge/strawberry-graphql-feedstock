@@ -171,6 +171,18 @@ Summary: A library for creating GraphQL APIs (with sanic)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+About strawberry-graphql-with-starlite
+--------------------------------------
+
+Home: https://strawberry.rocks
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with starlite)
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
 
 Current build status
 ====================
@@ -204,6 +216,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--opentelemetry-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-opentelemetry) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-opentelemetry.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-opentelemetry) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-opentelemetry.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-opentelemetry) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-opentelemetry.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-opentelemetry) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--pydantic-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-pydantic) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-pydantic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-pydantic) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-pydantic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-pydantic) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-pydantic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-pydantic) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--sanic-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-sanic) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-sanic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-sanic) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-sanic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-sanic) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-sanic.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-sanic) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--starlite-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-starlite) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-starlite.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-starlite) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-starlite.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-starlite) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-starlite.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-starlite) |
 
 Installing strawberry-graphql
 =============================
@@ -215,16 +228,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `strawberry-graphql, strawberry-graphql-with-aiohttp, strawberry-graphql-with-asgi, strawberry-graphql-with-chalice, strawberry-graphql-with-channels, strawberry-graphql-with-cli, strawberry-graphql-with-debug, strawberry-graphql-with-debug-server, strawberry-graphql-with-django, strawberry-graphql-with-fastapi, strawberry-graphql-with-flask, strawberry-graphql-with-opentelemetry, strawberry-graphql-with-pydantic, strawberry-graphql-with-sanic` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `strawberry-graphql, strawberry-graphql-with-aiohttp, strawberry-graphql-with-asgi, strawberry-graphql-with-chalice, strawberry-graphql-with-channels, strawberry-graphql-with-cli, strawberry-graphql-with-debug, strawberry-graphql-with-debug-server, strawberry-graphql-with-django, strawberry-graphql-with-fastapi, strawberry-graphql-with-flask, strawberry-graphql-with-opentelemetry, strawberry-graphql-with-pydantic, strawberry-graphql-with-sanic, strawberry-graphql-with-starlite` can be installed with `conda`:
 
 ```
-conda install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-debug-server strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-sanic
+conda install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-debug-server strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-sanic strawberry-graphql-with-starlite
 ```
 
 or with `mamba`:
 
 ```
-mamba install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-debug-server strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-sanic
+mamba install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-debug-server strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-sanic strawberry-graphql-with-starlite
 ```
 
 It is possible to list all of the versions of `strawberry-graphql` available on your platform with `conda`:
