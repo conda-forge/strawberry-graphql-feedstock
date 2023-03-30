@@ -86,15 +86,16 @@ EXTRA_TEST_IMPORTS = {
     "asgi": "strawberry.asgi",
     "chalice": "strawberry.chalice",
     "channels": "strawberry.channels",
-    # TODO: needs env var
-    # "debug-server": "strawberry.cli.debug_server",
+    "cli": "strawberry.cli",
     "django": "strawberry.django",
     "fastapi": "strawberry.fastapi",
     "flask": "strawberry.flask",
     "opentelemetry": "strawberry.extensions.tracing",
     "pydantic": "strawberry.experimental.pydantic",
     "sanic": "strawberry.sanic",
-    "cli": "strawberry.cli",
+    "starlite": "strawberry.starlite",
+    # TODO: needs env var
+    # "debug-server": "strawberry.cli.debug_server",
 }
 
 EXTRA_TEST_COMMANDS = {"cli": "strawberry --help"}
