@@ -1,4 +1,4 @@
-{% set version = "0.172.0" %}
+{% set version = "0.174.0" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 7bee67857d002d1ebc8b2ddbbcca1fa7c57ce5e9ec1cfde54e0d95d810a2f99c
+  sha256: fc64d83b0290f32aec6f880622c38c3249b49e10378642f89c31beaf5e0d5632
 
 build:
   # the build number gets reset by the bot
@@ -43,7 +43,7 @@ outputs:
         - backports.cached-property 1.*
         - graphql-core 3.2.*
         - python-dateutil 2.*
-        - typing_extensions >=3.7.4,<5.0.0
+        - typing_extensions >=4.0.0,<5.0.0
     test:
       imports:
         - strawberry
@@ -448,6 +448,33 @@ outputs:
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with starlite)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-pyinstrument
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python >=3.7
+      run:
+        - python >=3.7
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - pyinstrument >=4.0.0
+    test:
+      imports:
+        - strawberry
+        - strawberry.extensions.pyinstrument
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with pyinstrument)
       license: MIT
       license_file: LICENSE
       dev_url: https://github.com/strawberry-graphql/strawberry
