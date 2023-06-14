@@ -152,12 +152,12 @@ outputs:
       run:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - click >=7.0,<9.0
         - libcst >=0.4.7
         - pygments 2.*
         - python-multipart >=0.0.5,<0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
+        - typer >=0.7.0
         - uvicorn >=0.11.6,<0.22.0
     test:
       imports:
@@ -405,10 +405,10 @@ outputs:
       run:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - click >=7.0,<9.0
         - libcst >=0.4.7
         - pygments 2.*
         - rich >=12.0.0
+        - typer >=0.7.0
     test:
       imports:
         - strawberry
