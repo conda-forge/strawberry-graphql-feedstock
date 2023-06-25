@@ -1,4 +1,4 @@
-{% set version = "0.186.2" %}
+{% set version = "0.189.0" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 624fd469ec488dc6675c6e14dc0a9f07a623a805856de284b55a3a128ad9c210
+  sha256: 85b29d8ae84e75331afe0496452de603467091ed7029c9049489eb73382b773a
 
 build:
   # the build number gets reset by the bot
@@ -43,7 +43,7 @@ outputs:
         - backports.cached-property 1.*
         - graphql-core 3.2.*
         - python-dateutil 2.*
-        - typing_extensions >=4.1.0
+        - typing-extensions >=4.5.0
     test:
       imports:
         - strawberry
