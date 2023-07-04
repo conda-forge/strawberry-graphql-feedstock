@@ -67,6 +67,8 @@ outputs:
         - python << min_python >>
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}<% for dep in extra_deps %>
         - << dep >>
+        <%- endfor %><% for dep in known_extra_deps.get(extra, []) %>
+        - << dep >>
         <%- endfor %>
     test:
       imports:

@@ -437,6 +437,7 @@ outputs:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - starlite >=1.48.0
+        - pydantic <2  # from pydantic-openapi-schema
     test:
       imports:
         - strawberry
