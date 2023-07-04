@@ -76,10 +76,16 @@ PYPROJECT_TOML = f"strawberry-{VERSION}/pyproject.toml"
 
 #: despite claiming optional, these end up as hard `Requires-Dist`
 KNOWN_REQS = []
+
 #: these are handled externally
 KNOWN_SKIP = [
     "python",
 ]
+
+#: known deps not handled by upstream
+KNOWN_EXTRA_DEPS = {
+    "starlite": ["pydantic <2  # from pydantic-openapi-schema"],
+}
 
 EXTRA_TEST_IMPORTS = {
     "aiohttp": "strawberry.aiohttp",
@@ -182,9 +188,10 @@ def update_recipe(check=False):
         sha256_sum=SHA256_SUM,
         extra_outputs=extra_outputs,
         core_deps=core_deps,
+        known_extra_deps=KNOWN_EXTRA_DEPS,
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
-        min_python=MIN_PYTHON
+        min_python=MIN_PYTHON,
     )
 
     for tmpl_path in TMPL:
