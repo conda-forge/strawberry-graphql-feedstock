@@ -3,6 +3,7 @@ About strawberry-graphql-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/strawberry-graphql-feedstock/blob/main/LICENSE.txt)
 
+
 About strawberry-graphql
 ------------------------
 
@@ -15,6 +16,7 @@ Summary: A library for creating GraphQL APIs
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-aiohttp
 -------------------------------------
 
@@ -27,6 +29,7 @@ Summary: A library for creating GraphQL APIs (with aiohttp)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-asgi
 ----------------------------------
 
@@ -39,6 +42,7 @@ Summary: A library for creating GraphQL APIs (with asgi)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-chalice
 -------------------------------------
 
@@ -51,6 +55,7 @@ Summary: A library for creating GraphQL APIs (with chalice)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-channels
 --------------------------------------
 
@@ -63,6 +68,7 @@ Summary: A library for creating GraphQL APIs (with channels)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-cli
 ---------------------------------
 
@@ -75,6 +81,7 @@ Summary: A library for creating GraphQL APIs (with cli)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-debug
 -----------------------------------
 
@@ -87,6 +94,7 @@ Summary: A library for creating GraphQL APIs (with debug)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-debug-server
 ------------------------------------------
 
@@ -99,6 +107,7 @@ Summary: A library for creating GraphQL APIs (with debug-server)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-django
 ------------------------------------
 
@@ -111,6 +120,7 @@ Summary: A library for creating GraphQL APIs (with django)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-fastapi
 -------------------------------------
 
@@ -123,6 +133,7 @@ Summary: A library for creating GraphQL APIs (with fastapi)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-flask
 -----------------------------------
 
@@ -135,6 +146,7 @@ Summary: A library for creating GraphQL APIs (with flask)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-opentelemetry
 -------------------------------------------
 
@@ -147,6 +159,7 @@ Summary: A library for creating GraphQL APIs (with opentelemetry)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-pydantic
 --------------------------------------
 
@@ -159,6 +172,7 @@ Summary: A library for creating GraphQL APIs (with pydantic)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-pyinstrument
 ------------------------------------------
 
@@ -171,6 +185,7 @@ Summary: A library for creating GraphQL APIs (with pyinstrument)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-sanic
 -----------------------------------
 
@@ -183,6 +198,7 @@ Summary: A library for creating GraphQL APIs (with sanic)
 Development: https://github.com/strawberry-graphql/strawberry
 
 Documentation: https://strawberry.rocks/docs
+
 About strawberry-graphql-with-starlite
 --------------------------------------
 
