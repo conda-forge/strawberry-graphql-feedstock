@@ -84,7 +84,7 @@ KNOWN_SKIP = [
 
 #: known deps not handled by upstream
 KNOWN_EXTRA_DEPS = {
-    "starlite": ["pydantic <2  # from pydantic-openapi-schema"],
+    "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
 }
 
 EXTRA_TEST_IMPORTS = {
