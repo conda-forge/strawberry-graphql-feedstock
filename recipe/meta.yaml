@@ -296,7 +296,7 @@ outputs:
       run:
         - python >=3.7
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - pydantic <2
+        - pydantic >1.6.1
     test:
       imports:
         - strawberry
