@@ -40,7 +40,6 @@ outputs:
       run:
         - python >=3.7
         - astunparse 1.*
-        - backports.cached-property 1.*
         - graphql-core 3.2.*
         - python-dateutil 2.*
         - typing-extensions >=4.5.0
