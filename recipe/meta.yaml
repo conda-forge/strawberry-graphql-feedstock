@@ -1,4 +1,4 @@
-{% set version = "0.201.1" %}
+{% set version = "0.202.0" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 0a669bfcd87f1908130878cbdd5edc5ea494d335332d4dac8eb9d3977618c9e1
+  sha256: f60306663d5fc62f24e45ffbcb3b8bb3418862e9b071b6c61681ebd2cd15fecd
 
 build:
   # the build number gets reset by the bot
@@ -17,9 +17,9 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python >=3.8
   run:
-    - python >=3.7
+    - python >=3.8
 
 outputs:
   - name: strawberry-graphql
@@ -35,12 +35,11 @@ outputs:
         - jinja2
         - pip
         - poetry >=0.12
-        - python >=3.7
+        - python >=3.8
         - tomli
       run:
-        - python >=3.7
+        - python >=3.8
         - astunparse 1.*
-        - backports.cached-property 1.*
         - graphql-core 3.2.*
         - python-dateutil 2.*
         - typing-extensions >=4.5.0
@@ -65,9 +64,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - aiohttp 3.*
     test:
@@ -92,9 +91,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - python-multipart >=0.0.5,<0.0.7
         - starlette >=0.18.0
@@ -120,9 +119,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - rich >=12.0.0
@@ -148,9 +147,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - pygments 2.*
@@ -181,9 +180,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - asgiref 3.*
         - django >=3.2
@@ -209,9 +208,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - asgiref 3.*
         - channels >=3.0.5
@@ -237,9 +236,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - flask >=1.1
     test:
@@ -264,9 +263,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - opentelemetry-api <2
         - opentelemetry-sdk <2
@@ -292,9 +291,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - pydantic >1.6.1
     test:
@@ -319,9 +318,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - sanic >=20.12.2
     test:
@@ -346,9 +345,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - fastapi >=0.65.2
         - python-multipart >=0.0.5,<0.0.7
@@ -374,9 +373,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - chalice 1.*
     test:
@@ -401,9 +400,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - pygments 2.*
@@ -432,9 +431,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - starlite >=1.48.0
         - pydantic <2,!=1.10.12  # from pydantic-openapi-schema
@@ -460,9 +459,9 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.7
+        - python >=3.8
       run:
-        - python >=3.7
+        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - pyinstrument >=4.0.0
     test:
