@@ -1,4 +1,4 @@
-{% set version = "0.209.4" %}
+{% set version = "0.209.5" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 9f7f763a884bc31f8c48571a9174b48b752a8c384c422a9d0ad11bdff804c9ed
+  sha256: 62ad1a0ef6313559dfd85827f7f714372cd74461ebfa63e5da601dc06347a838
 
 build:
   # the build number gets reset by the bot
@@ -27,7 +27,7 @@ outputs:
       noarch: python
       script:
         - {{ PYTHON }} {{ RECIPE_DIR }}/update_recipe.py --check
-        - {{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed --no-build-isolation
+        - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
       entry_points:
         - strawberry = strawberry.cli:run
     requirements:
@@ -35,8 +35,10 @@ outputs:
         - jinja2
         - pip
         - poetry >=0.12
-        - python >=3.8
         - tomli
+        # TODO: clean this up when poetry figures it out
+        - python >=3.8,<3.12.0a0
+        - six
       run:
         - python >=3.8
         - astunparse 1.*
