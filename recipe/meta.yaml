@@ -1,4 +1,4 @@
-{% set version = "0.209.8" %}
+{% set version = "0.211.0" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 565392a8a8f70b3653638da8383d748bfcf3d68d50f8eac32c40e15d070e693a
+  sha256: d8f540a13dae79341b625f217cd6167470a1eefa00affdaacefc7ed6177fb696
 
 build:
   # the build number gets reset by the bot
@@ -254,6 +254,33 @@ outputs:
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with flask)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-quart
+    build:
+      noarch: python
+    requirements:
+      host:
+        - pip
+        - python >=3.8
+      run:
+        - python >=3.8
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - quart >=0.19.3
+    test:
+      imports:
+        - strawberry
+        - strawberry.quart.views
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with quart)
       license: MIT
       license_file: LICENSE
       dev_url: https://github.com/strawberry-graphql/strawberry

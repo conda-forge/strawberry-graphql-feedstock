@@ -99,6 +99,7 @@ EXTRA_TEST_IMPORTS = {
     "opentelemetry": "strawberry.extensions.tracing",
     "pydantic": "strawberry.experimental.pydantic",
     "pyinstrument": "strawberry.extensions.pyinstrument",
+    "quart": "strawberry.quart.views",
     "sanic": "strawberry.sanic",
     "starlite": "strawberry.starlite",
     # TODO: needs env var
