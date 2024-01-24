@@ -96,6 +96,7 @@ EXTRA_TEST_IMPORTS = {
     "django": "strawberry.django",
     "fastapi": "strawberry.fastapi",
     "flask": "strawberry.flask",
+    "litestar": "strawberry.litestar",
     "opentelemetry": "strawberry.extensions.tracing",
     "pydantic": "strawberry.experimental.pydantic",
     "pyinstrument": "strawberry.extensions.pyinstrument",
