@@ -1,4 +1,4 @@
-{% set version = "0.218.1" %}
+{% set version = "0.219.2" %}
 
 package:
   name: strawberry-graphql-split
@@ -7,7 +7,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 0b56265c35cd1874dae6463e971e3e8a2d5533c786069956b3ae4a60a2a238ff
+  sha256: b7a9b3115398402ec04fceb76b0dd3908dd90009cf20d344071be985c039aac7
 
 build:
   # the build number gets reset by the bot
