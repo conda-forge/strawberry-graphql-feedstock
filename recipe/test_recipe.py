@@ -2,12 +2,12 @@
 
 Invoke this locally from the root of the feedstock, assuming `tomli` and `jinja2`:
 
-    python recipe/update_recipe.py
+    python recipe/test_recipe.py --update
     git commit -m "updated recipe with update script"
     conda smithy rerender
 
-The optional `--check` parameter will fail if new `[extra]`s are added, or
-dependencies change.
+Without the optional `--update` parameter, it will fail if new `[extra]`s are
+added, or dependencies change.
 
 This tries to work with the conda-forge autotick bot by reading updates from
 `meta.yml`:
@@ -20,7 +20,7 @@ If running locally against a non-bot-requested version, you'll probably need
 to update those fields in `meta.yaml`.
 
 If some underlying project data changed e.g. the `path_to-the_tarball`, update
-`meta.j2.yaml` and re-run.
+`TEMPLATE` below and re-run with `--update`.
 """
 import os
 import re
@@ -41,6 +41,119 @@ DELIMIT = dict(
     variable_start_string="<<",
     variable_end_string=">>",
 )
+
+TEMPLATE = """
+{% set version = "<< version >>" %}
+
+# handle undefined PYTHON in `noarch: generic` outputs
+{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+
+package:
+  name: strawberry-graphql-split
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
+  # the SHA256 gets updated by the bot
+  sha256: << sha256_sum >>
+
+build:
+  # the build number gets reset by the bot
+  number: << build_number >>
+  noarch: python
+
+requirements:
+  host:
+    - pip
+    - python << min_python >>
+  run:
+    - python << min_python >>
+
+outputs:
+  - name: strawberry-graphql
+    build:
+      noarch: python
+      script:
+        - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
+        - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      entry_points:
+        - strawberry = strawberry.cli:run
+    requirements:
+      host:
+        - jinja2
+        - pip
+        - poetry >=0.12
+        - tomli
+        # TODO: clean this up when poetry figures it out
+        - python << min_python >>,<3.12.0a0
+        - six
+      run:
+        - python << min_python >><% for dep in core_deps %>
+        - << dep >>
+        <%- endfor %>
+    test:
+      imports:
+        - strawberry
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+<% for extra, extra_deps in extra_outputs.items() %>
+  - name: strawberry-graphql-with-<< extra >>
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}<% for dep in extra_deps %>
+        - << dep >>
+        <%- endfor %><% for dep in known_extra_deps.get(extra, []) %>
+        - << dep >>
+        <%- endfor %>
+    test:
+      imports:
+        - strawberry<% if extra in extra_test_imports %>
+        - << extra_test_imports[extra] >>
+        <%- else %>
+        # TODO: import test for << extra >>
+        <%- endif %>
+      commands:
+        - pip check<% if extra in extra_test_commands %>
+        - << extra_test_commands[extra] >>
+        <%- endif %>
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with << extra >>)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+<% endfor %>
+
+about:
+  home: https://strawberry.rocks
+  summary: A library for creating GraphQL APIs
+  license: MIT
+  license_file: LICENSE
+  dev_url: https://github.com/strawberry-graphql/strawberry
+  doc_url: https://strawberry.rocks/docs
+
+extra:
+  feedstock-name: strawberry-graphql
+  recipe-maintainers:
+    - cshaley
+    - thewchan
+    - bollwyvl
+"""
+
 DEV_URL = "https://github.com/strawberry-graphql/strawberry"
 
 #: assume running locally
@@ -109,7 +222,7 @@ EXTRA_TEST_IMPORTS = {
 EXTRA_TEST_COMMANDS = {"cli": "strawberry --help"}
 
 #: some extras may become temporarily broken: add them here to skip
-SKIP_EXTRAS = []
+SKIP_EXTRAS = ["litestar"]
 
 
 def is_required(dep, dep_spec):
@@ -168,8 +281,9 @@ def get_pyproject_data():
             return tomli.load(tf.extractfile(PYPROJECT_TOML))
 
 
-def update_recipe(check=False):
-    """update or check a recipe based on the `pyproject.toml` data"""
+def verify_recipe(update=False):
+    """check (or update) a recipe based on the `pyproject.toml` data"""
+    check = not update
     preflight_recipe()
     pyproject = get_pyproject_data()
     deps = pyproject["tool"]["poetry"]["dependencies"]
@@ -195,35 +309,31 @@ def update_recipe(check=False):
         min_python=MIN_PYTHON,
     )
 
-    for tmpl_path in TMPL:
-        dest_path = tmpl_path.parent / tmpl_path.name.replace(".j2", "")
-        old_text = dest_path.read_text(encoding="utf-8")
-        template = jinja2.Template(
-            tmpl_path.read_text(encoding="utf-8").strip(), **DELIMIT
-        )
-        new_text = template.render(**context).strip() + "\n"
+    old_text = META.read_text(encoding="utf-8")
+    template = jinja2.Template(TEMPLATE.strip(), **DELIMIT)
+    new_text = template.render(**context).strip() + "\n"
 
-        if check:
-            if new_text.strip() != old_text.strip():
-                print(f"{dest_path} is not up-to-date:")
-                print(
-                    "\n".join(
-                        difflib.unified_diff(
-                            old_text.splitlines(),
-                            new_text.splitlines(),
-                            dest_path.name,
-                            f"{dest_path.name} (updated)",
-                        )
+    if check:
+        if new_text.strip() != old_text.strip():
+            print(f"{META} is not up-to-date:")
+            print(
+                "\n".join(
+                    difflib.unified_diff(
+                        old_text.splitlines(),
+                        new_text.splitlines(),
+                        META.name,
+                        f"{META} (expected)",
                     )
                 )
-                print("either apply the above patch, or run locally:")
-                print("\n\tpython recipe/update_recipe.py\n")
-                return 1
-        else:
-            dest_path.write_text(new_text, encoding="utf-8")
+            )
+            print("either apply the above patch, or run locally:")
+            print("\n\tpython recipe/test_recipe.py --update\n")
+            return 1
+    else:
+        META.write_text(new_text, encoding="utf-8")
 
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(update_recipe(check="--check" in sys.argv))
+    sys.exit(verify_recipe(update="--update" in sys.argv))
