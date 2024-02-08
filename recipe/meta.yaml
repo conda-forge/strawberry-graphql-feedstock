@@ -1,5 +1,8 @@
 {% set version = "0.219.2" %}
 
+# handle undefined PYTHON in `noarch: generic` outputs
+{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+
 package:
   name: strawberry-graphql-split
   version: {{ version }}
@@ -62,13 +65,9 @@ outputs:
 
   - name: strawberry-graphql-with-aiohttp
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - aiohttp 3.*
     test:
@@ -89,13 +88,9 @@ outputs:
 
   - name: strawberry-graphql-with-asgi
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - python-multipart >=0.0.7
         - starlette >=0.18.0
@@ -117,13 +112,9 @@ outputs:
 
   - name: strawberry-graphql-with-debug
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - rich >=12.0.0
@@ -145,13 +136,9 @@ outputs:
 
   - name: strawberry-graphql-with-debug-server
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - pygments 2.*
@@ -178,13 +165,9 @@ outputs:
 
   - name: strawberry-graphql-with-django
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - asgiref 3.*
         - django >=3.2
@@ -206,13 +189,9 @@ outputs:
 
   - name: strawberry-graphql-with-channels
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - asgiref 3.*
         - channels >=3.0.5
@@ -234,13 +213,9 @@ outputs:
 
   - name: strawberry-graphql-with-flask
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - flask >=1.1
     test:
@@ -261,13 +236,9 @@ outputs:
 
   - name: strawberry-graphql-with-quart
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - quart >=0.19.3
     test:
@@ -288,13 +259,9 @@ outputs:
 
   - name: strawberry-graphql-with-opentelemetry
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - opentelemetry-api <2
         - opentelemetry-sdk <2
@@ -316,13 +283,9 @@ outputs:
 
   - name: strawberry-graphql-with-pydantic
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - pydantic >1.6.1
     test:
@@ -343,13 +306,9 @@ outputs:
 
   - name: strawberry-graphql-with-sanic
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - sanic >=20.12.2
     test:
@@ -370,13 +329,9 @@ outputs:
 
   - name: strawberry-graphql-with-fastapi
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - fastapi >=0.65.2
         - python-multipart >=0.0.7
@@ -398,13 +353,9 @@ outputs:
 
   - name: strawberry-graphql-with-chalice
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - chalice 1.*
     test:
@@ -425,13 +376,9 @@ outputs:
 
   - name: strawberry-graphql-with-cli
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - pygments 2.*
@@ -456,13 +403,9 @@ outputs:
 
   - name: strawberry-graphql-with-starlite
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - starlite >=1.48.0
         - pydantic <2,!=1.10.12  # from pydantic-openapi-schema
@@ -484,13 +427,9 @@ outputs:
 
   - name: strawberry-graphql-with-pyinstrument
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python >=3.8
       run:
-        - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - pyinstrument >=4.0.0
     test:

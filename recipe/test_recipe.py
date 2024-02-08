@@ -45,6 +45,9 @@ DELIMIT = dict(
 TEMPLATE = """
 {% set version = "<< version >>" %}
 
+# handle undefined PYTHON in `noarch: generic` outputs
+{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+
 package:
   name: strawberry-graphql-split
   version: {{ version }}
@@ -105,13 +108,9 @@ outputs:
 <% for extra, extra_deps in extra_outputs.items() %>
   - name: strawberry-graphql-with-<< extra >>
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - pip
-        - python << min_python >>
       run:
-        - python << min_python >>
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}<% for dep in extra_deps %>
         - << dep >>
         <%- endfor %><% for dep in known_extra_deps.get(extra, []) %>
@@ -334,6 +333,7 @@ def verify_recipe(update=False):
         META.write_text(new_text, encoding="utf-8")
 
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(verify_recipe(update="--update" in sys.argv))
