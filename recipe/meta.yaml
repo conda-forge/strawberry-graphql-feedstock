@@ -26,7 +26,7 @@ outputs:
     build:
       noarch: python
       script:
-        - {{ PYTHON }} {{ RECIPE_DIR }}/update_recipe.py --check
+        - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
         - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
       entry_points:
         - strawberry = strawberry.cli:run
@@ -97,7 +97,7 @@ outputs:
       run:
         - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - python-multipart >=0.0.5,<0.0.7
+        - python-multipart >=0.0.7
         - starlette >=0.18.0
     test:
       imports:
@@ -155,7 +155,7 @@ outputs:
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - libcst >=0.4.7
         - pygments 2.*
-        - python-multipart >=0.0.5,<0.0.7
+        - python-multipart >=0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
         - typer >=0.7.0
@@ -379,7 +379,7 @@ outputs:
         - python >=3.8
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - fastapi >=0.65.2
-        - python-multipart >=0.0.5,<0.0.7
+        - python-multipart >=0.0.7
     test:
       imports:
         - strawberry
