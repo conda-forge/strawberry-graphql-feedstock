@@ -14,7 +14,7 @@ source:
 
 build:
   # the build number gets reset by the bot
-  number: 0
+  number: 1
   noarch: python
 
 requirements:
