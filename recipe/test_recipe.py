@@ -197,6 +197,7 @@ KNOWN_SKIP = [
 
 #: known deps not handled by upstream
 KNOWN_EXTRA_DEPS = {
+    # "some-extra": ["some-dep >=1,<2  # comment explaining why"],
     "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
 }
 
@@ -209,6 +210,7 @@ EXTRA_TEST_IMPORTS = {
     "django": "strawberry.django",
     "fastapi": "strawberry.fastapi",
     "flask": "strawberry.flask",
+    "litestar": "strawberry.litestar",
     "opentelemetry": "strawberry.extensions.tracing",
     "pydantic": "strawberry.experimental.pydantic",
     "pyinstrument": "strawberry.extensions.pyinstrument",
@@ -222,7 +224,7 @@ EXTRA_TEST_IMPORTS = {
 EXTRA_TEST_COMMANDS = {"cli": "strawberry --help"}
 
 #: some extras may become temporarily broken: add them here to skip
-SKIP_EXTRAS = ["litestar"]
+SKIP_EXTRAS = []
 
 
 def is_required(dep, dep_spec):
