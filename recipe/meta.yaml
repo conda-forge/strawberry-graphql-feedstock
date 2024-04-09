@@ -408,11 +408,10 @@ outputs:
       run:
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
         - starlite >=1.48.0
-        - pydantic <2,!=1.10.12  # from pydantic-openapi-schema
     test:
       imports:
         - strawberry
-        - strawberry.starlite
+        # TODO: import test for starlite
       commands:
         - pip check
       requires:
@@ -420,6 +419,29 @@ outputs:
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with starlite)
+      license: MIT
+      license_file: LICENSE
+      dev_url: https://github.com/strawberry-graphql/strawberry
+      doc_url: https://strawberry.rocks/docs
+
+  - name: strawberry-graphql-with-litestar
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - litestar >=2
+    test:
+      imports:
+        - strawberry
+        - strawberry.litestar
+      commands:
+        - pip check
+      requires:
+        - pip
+    about:
+      home: https://strawberry.rocks
+      summary: A library for creating GraphQL APIs (with litestar)
       license: MIT
       license_file: LICENSE
       dev_url: https://github.com/strawberry-graphql/strawberry

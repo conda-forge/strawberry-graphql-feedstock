@@ -197,7 +197,7 @@ KNOWN_SKIP = [
 
 #: known deps not handled by upstream
 KNOWN_EXTRA_DEPS = {
-    "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
+    # "some-extra": ["some-dep >=1,<2  # comment explaining why"],
 }
 
 EXTRA_TEST_IMPORTS = {
@@ -214,7 +214,7 @@ EXTRA_TEST_IMPORTS = {
     "pyinstrument": "strawberry.extensions.pyinstrument",
     "quart": "strawberry.quart.views",
     "sanic": "strawberry.sanic",
-    "starlite": "strawberry.starlite",
+    "litestar": "strawberry.litestar",
     # TODO: needs env var
     # "debug-server": "strawberry.cli.debug_server",
 }
@@ -222,7 +222,7 @@ EXTRA_TEST_IMPORTS = {
 EXTRA_TEST_COMMANDS = {"cli": "strawberry --help"}
 
 #: some extras may become temporarily broken: add them here to skip
-SKIP_EXTRAS = ["litestar"]
+SKIP_EXTRAS = []
 
 
 def is_required(dep, dep_spec):
