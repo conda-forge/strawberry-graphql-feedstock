@@ -201,6 +201,10 @@ KNOWN_EXTRA_DEPS = {
     "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
 }
 
+REPLACE_DEPS = {
+    "graphlib_backport": "graphlib-backport"
+}
+
 EXTRA_TEST_IMPORTS = {
     "aiohttp": "strawberry.aiohttp",
     "asgi": "strawberry.asgi",
@@ -253,6 +257,8 @@ def reqtify(raw, deps):
         bits = dep[1:].split(".")
         bits = bits[:1] if op == "^" else bits[:2]
         dep = ".".join([*bits, "*"])
+
+    raw = REPLACE_DEPS.get(raw, raw)
 
     return f"{raw} {dep}".lower()
 

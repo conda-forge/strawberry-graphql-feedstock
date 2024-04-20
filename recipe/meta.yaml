@@ -380,6 +380,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
+        - graphlib-backport *
         - libcst >=0.4.7
         - pygments 2.*
         - rich >=12.0.0
