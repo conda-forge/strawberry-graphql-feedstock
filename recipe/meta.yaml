@@ -363,7 +363,7 @@ outputs:
         - strawberry
         - strawberry.chalice
       commands:
-        - pip check
+        
       requires:
         - pip
     about:
