@@ -124,7 +124,7 @@ outputs:
         # TODO: import test for << extra >>
         <%- endif %>
       commands:
-        - pip check<% if extra in extra_test_commands %>
+        <% if extra not in skip_pip_check %>- pip check<% endif %><% if extra in extra_test_commands %>
         - << extra_test_commands[extra] >>
         <%- endif %>
       requires:
@@ -195,15 +195,15 @@ KNOWN_SKIP = [
     "python",
 ]
 
+SKIP_PIP_CHECK = ["chalice"]
+
 #: known deps not handled by upstream
 KNOWN_EXTRA_DEPS = {
     # "some-extra": ["some-dep >=1,<2  # comment explaining why"],
     "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
 }
 
-REPLACE_DEPS = {
-    "graphlib_backport": "graphlib-backport"
-}
+REPLACE_DEPS = {"graphlib_backport": "graphlib-backport"}
 
 EXTRA_TEST_IMPORTS = {
     "aiohttp": "strawberry.aiohttp",
@@ -315,6 +315,7 @@ def verify_recipe(update=False):
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
         min_python=MIN_PYTHON,
+        skip_pip_check=SKIP_PIP_CHECK,
     )
 
     old_text = META.read_text(encoding="utf-8")
