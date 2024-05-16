@@ -123,10 +123,12 @@ outputs:
         <%- else %>
         # TODO: import test for << extra >>
         <%- endif %>
+      <% if extra not in skip_pip_check or extra in extra_test_commands -%>
       commands:
         <% if extra not in skip_pip_check %>- pip check<% endif %><% if extra in extra_test_commands %>
         - << extra_test_commands[extra] >>
         <%- endif %>
+      <% endif -%>
       requires:
         - pip
     about:
