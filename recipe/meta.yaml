@@ -362,7 +362,6 @@ outputs:
       imports:
         - strawberry
         - strawberry.chalice
-      commands:
       requires:
         - pip
     about:
