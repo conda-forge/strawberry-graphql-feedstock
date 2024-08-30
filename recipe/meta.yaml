@@ -10,7 +10,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 8e04bb8821b303cb2cbd2c981f211b2d61bd21e3d171a638d93ceb99081194ac
+  sha256: 04eb9d5bf57be171ae3699c6852afd0b4dca025ef641ae2b6137989b90f5b66f
 
 build:
   # the build number gets reset by the bot
