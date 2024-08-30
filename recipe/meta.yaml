@@ -37,10 +37,8 @@ outputs:
         - jinja2
         - pip
         - poetry >=0.12
+        - poetry-core
         - tomli
-        # TODO: clean this up when poetry figures it out
-        - python >=3.8,<3.12.0a0
-        - six
       run:
         - python >=3.8
         - astunparse 1.*

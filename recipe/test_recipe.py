@@ -64,7 +64,6 @@ build:
 
 requirements:
   host:
-    - pip
     - python << min_python >>
   run:
     - python << min_python >>
@@ -83,10 +82,8 @@ outputs:
         - jinja2
         - pip
         - poetry >=0.12
+        - poetry-core
         - tomli
-        # TODO: clean this up when poetry figures it out
-        - python << min_python >>,<3.12.0a0
-        - six
       run:
         - python << min_python >><% for dep in core_deps %>
         - << dep >>
