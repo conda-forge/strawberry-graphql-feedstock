@@ -71,7 +71,7 @@ requirements:
   host:
     - jinja2
     - pip
-    - poetry-core >=0.12
+    - poetry >=0.12
     - python << min_python >>
     - tomli
   run:
