@@ -72,6 +72,7 @@ requirements:
     - jinja2
     - pip
     - poetry >=0.12
+    - poetry-core
     - python << min_python >>
     - tomli
   run:
