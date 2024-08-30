@@ -1,4 +1,4 @@
-{% set version = "0.237.3" %}
+{% set version = "0.238.0" %}
 
 # handle undefined PYTHON in `noarch: generic` outputs
 {% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
@@ -395,30 +395,6 @@ outputs:
     about:
       home: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with cli)
-      license: MIT
-      license_file: LICENSE
-      dev_url: https://github.com/strawberry-graphql/strawberry
-      doc_url: https://strawberry.rocks/docs
-
-  - name: strawberry-graphql-with-starlite
-    build:
-      noarch: generic
-    requirements:
-      run:
-        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}
-        - starlite >=1.48.0
-        - pydantic <2,!=1.10.12  # from pydantic-openapi-schema
-    test:
-      imports:
-        - strawberry
-        - strawberry.starlite
-      commands:
-        - pip check
-      requires:
-        - pip
-    about:
-      home: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with starlite)
       license: MIT
       license_file: LICENSE
       dev_url: https://github.com/strawberry-graphql/strawberry
