@@ -49,7 +49,7 @@ TEMPLATE = """
 {% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
 
 package:
-  name: strawberry-graphql-split
+  name: strawberry-graphql
   version: {{ version }}
 
 source:
@@ -61,50 +61,35 @@ build:
   # the build number gets reset by the bot
   number: << build_number >>
   noarch: python
+  script:
+    - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  entry_points:
+    - strawberry = strawberry.cli:run
 
 requirements:
   host:
+    - jinja2
     - pip
+    - poetry >=0.12
+    - poetry-core
     - python << min_python >>
+    - tomli
   run:
-    - python << min_python >>
+    - python << min_python >><% for dep in core_deps %>
+    - << dep >>
+    <%- endfor %>
+
+test:
+  imports:
+    - strawberry
+  commands:
+    - pip check
+  requires:
+    - pip
 
 outputs:
   - name: strawberry-graphql
-    build:
-      noarch: python
-      script:
-        - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
-        - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-      entry_points:
-        - strawberry = strawberry.cli:run
-    requirements:
-      host:
-        - jinja2
-        - pip
-        - poetry >=0.12
-        - tomli
-        # TODO: clean this up when poetry figures it out
-        - python << min_python >>,<3.12.0a0
-        - six
-      run:
-        - python << min_python >><% for dep in core_deps %>
-        - << dep >>
-        <%- endfor %>
-    test:
-      imports:
-        - strawberry
-      commands:
-        - pip check
-      requires:
-        - pip
-    about:
-      home: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs
-      license: MIT
-      license_file: LICENSE
-      dev_url: https://github.com/strawberry-graphql/strawberry
-      doc_url: https://strawberry.rocks/docs
 <% for extra, extra_deps in extra_outputs.items() %>
   - name: strawberry-graphql-with-<< extra >>
     build:
