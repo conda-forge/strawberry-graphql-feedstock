@@ -76,6 +76,7 @@ requirements:
     - python << min_python >>
     - tomli
   run:
+    - packaging
     - python << min_python >><% for dep in core_deps %>
     - << dep >>
     <%- endfor %>
