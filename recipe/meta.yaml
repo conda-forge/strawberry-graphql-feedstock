@@ -1,4 +1,4 @@
-{% set version = "0.240.0" %}
+{% set version = "0.240.2" %}
 
 # handle undefined PYTHON in `noarch: generic` outputs
 {% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
@@ -10,7 +10,7 @@ package:
 source:
   url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 1fcec5f174b911f9b58f8164e836d3d1332fe1bc7939d16926904d842fdd6aee
+  sha256: 3f1d092e3bce8527c512dbddd6dfdf95c1023bd1c6e4cbac667c985bcabf04f2
 
 build:
   # the build number gets reset by the bot
@@ -31,7 +31,6 @@ requirements:
     - python >=3.8
     - tomli
   run:
-    - packaging
     - python >=3.8
     - astunparse 1.*
     - graphql-core >=3.2.0,<3.4.0
