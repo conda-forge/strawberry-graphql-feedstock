@@ -30,6 +30,7 @@ requirements:
     - poetry-core
     - python >=3.8
     - tomli
+    - wheel
   run:
     - python >=3.8
     - astunparse 1.*
