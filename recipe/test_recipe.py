@@ -75,6 +75,7 @@ requirements:
     - poetry-core
     - python << min_python >>
     - tomli
+    - wheel
   run:
     - python << min_python >><% for dep in core_deps %>
     - << dep >>
