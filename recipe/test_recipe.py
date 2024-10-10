@@ -75,11 +75,12 @@ requirements:
     - poetry-core
     - python << min_python >>
     - tomli
-    - wheel
   run:
     - python << min_python >><% for dep in core_deps %>
     - << dep >>
     <%- endfor %>
+    # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
+    - wheel
 
 test:
   imports:
