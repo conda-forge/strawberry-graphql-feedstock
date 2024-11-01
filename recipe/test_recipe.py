@@ -53,7 +53,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
   sha256: << sha256_sum >>
 
