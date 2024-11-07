@@ -1,7 +1,8 @@
-{% set version = "0.247.2" %}
+{% set version = "0.248.0" %}
 
-# handle undefined PYTHON in `noarch: generic` outputs
-{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+# handle undefined magic python variables
+{% set python_min = python_min | default("3.9") %}
+{% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
   name: strawberry-graphql
@@ -10,7 +11,7 @@ package:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 480f24ff9eaa25785458fc109b5c142ab84fe3024bc3a9666fefd085ce941561
+  sha256: 815547058b8d55aad459a929652aaa32846ff11b08f48efe2807622b7b87a826
 
 build:
   # the build number gets reset by the bot
@@ -28,11 +29,10 @@ requirements:
     - pip
     - poetry >=0.12
     - poetry-core
-    - python >=3.8
+    - python {{ python_min }}
     - tomli
   run:
-    - python >=3.8
-    - astunparse 1.*
+    - python >={{ python_min }}
     - graphql-core >=3.2.0,<3.4.0
     - python-dateutil 2.*
     - typing-extensions >=4.5.0

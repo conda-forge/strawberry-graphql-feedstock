@@ -42,11 +42,15 @@ DELIMIT = dict(
     variable_end_string=">>",
 )
 
+#: this appears in the global pinnings, but not predictably reachable during build
+MIN_PYTHON = "3.9"
+
 TEMPLATE = """
 {% set version = "<< version >>" %}
 
-# handle undefined PYTHON in `noarch: generic` outputs
-{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+# handle undefined magic python variables
+{% set python_min = python_min | default("<< min_python >>") %}
+{% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
   name: strawberry-graphql
@@ -73,10 +77,10 @@ requirements:
     - pip
     - poetry >=0.12
     - poetry-core
-    - python << min_python >>
+    - python {{ python_min }}
     - tomli
   run:
-    - python << min_python >><% for dep in core_deps %>
+    - python >={{ python_min }}<% for dep in core_deps %>
     - << dep >>
     <%- endfor %>
     # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
@@ -157,7 +161,6 @@ if "RECIPE_DIR" in os.environ:
 TMPL = [*WORK_DIR.glob("*.j2.*")]
 META = WORK_DIR / "meta.yaml"
 CURRENT_META_TEXT = META.read_text(encoding="utf-8")
-MIN_PYTHON = ">=3.8"
 
 #: read the version from what the bot might have updated
 try:
@@ -222,17 +225,41 @@ SKIP_EXTRAS = []
 
 def is_required(dep, dep_spec):
     required = True
-    print(f"is {dep} required: {dep_spec}")
+    print("-", dep, "required:", end=" ")
 
     if dep in KNOWN_SKIP:
         required = False
     elif dep in KNOWN_REQS:
         required = True
-    elif isinstance(dep_spec, dict) and dep_spec.get("optional"):
-        required = False
+    elif isinstance(dep_spec, dict):
+        optional = dep_spec.get("optional")
+        python = dep_spec.get("python")
+        if optional:
+            required = False
+        elif python:
+            required = required_python(python)
 
-    print("...", required)
+    print("YES" if required else "no", "\n  - ", dep_spec)
     return required
+
+
+def required_python(python_spec: str):
+    min_py = [*map(int, MIN_PYTHON.split("."))]
+    this_py = [
+        *map(
+            int,
+            python_spec.replace(">", "").replace("<", "").replace("=", "").split("."),
+        )
+    ]
+    if python_spec.startswith(">="):
+        return this_py >= min_py
+    elif python_spec.startswith(">"):
+        return this_py > min_py
+    elif python_spec.startswith("<="):
+        return this_py <= min_py
+    elif python_spec.startswith("<"):
+        return this_py < min_py
+    raise RuntimeError("don't know what to do with python {python_spec}")
 
 
 def reqtify(raw, deps):
@@ -303,8 +330,8 @@ def verify_recipe(update=False):
         known_extra_deps=KNOWN_EXTRA_DEPS,
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
-        min_python=MIN_PYTHON,
         skip_pip_check=SKIP_PIP_CHECK,
+        min_python=MIN_PYTHON,
     )
 
     old_text = META.read_text(encoding="utf-8")
