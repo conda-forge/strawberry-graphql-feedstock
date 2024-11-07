@@ -45,8 +45,9 @@ DELIMIT = dict(
 TEMPLATE = """
 {% set version = "<< version >>" %}
 
-# handle undefined PYTHON in `noarch: generic` outputs
-{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
+# handle undefined magic python variables
+{% set python_min = python_min | default("3.9") %}
+{% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
   name: strawberry-graphql
@@ -73,10 +74,10 @@ requirements:
     - pip
     - poetry >=0.12
     - poetry-core
-    - python << min_python >>
+    - python {{ python_min }}
     - tomli
   run:
-    - python << min_python >><% for dep in core_deps %>
+    - python >={{ python_min }}<% for dep in core_deps %>
     - << dep >>
     <%- endfor %>
     # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
@@ -157,7 +158,6 @@ if "RECIPE_DIR" in os.environ:
 TMPL = [*WORK_DIR.glob("*.j2.*")]
 META = WORK_DIR / "meta.yaml"
 CURRENT_META_TEXT = META.read_text(encoding="utf-8")
-MIN_PYTHON = ">=3.8"
 
 #: read the version from what the bot might have updated
 try:
@@ -303,7 +303,6 @@ def verify_recipe(update=False):
         known_extra_deps=KNOWN_EXTRA_DEPS,
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
-        min_python=MIN_PYTHON,
         skip_pip_check=SKIP_PIP_CHECK,
     )
 
