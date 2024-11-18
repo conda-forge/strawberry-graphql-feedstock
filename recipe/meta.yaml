@@ -1,4 +1,4 @@
-{% set version = "0.248.1" %}
+{% set version = "0.250.0" %}
 
 # handle undefined magic python variables
 {% set python_min = python_min | default("3.9") %}
@@ -11,7 +11,7 @@ package:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: d05870ada9f0ff3d536813834e7deb14f3b93a97f551d88be887c301b0c000ab
+  sha256: 6f087c1fd3c3a276f99cc84e59f5db94f53b5769b2a729e788b7987d74cbe3fb
 
 build:
   # the build number gets reset by the bot
