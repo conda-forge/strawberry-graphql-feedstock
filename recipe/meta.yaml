@@ -1,7 +1,5 @@
 {% set version = "0.257.0" %}
 
-# handle undefined magic python variables
-{% set python_min = python_min | default("3.9") %}
 {% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
@@ -19,7 +17,7 @@ build:
   noarch: python
   script:
     - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   entry_points:
     - strawberry = strawberry.cli:run
 
