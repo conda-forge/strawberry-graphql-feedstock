@@ -1,7 +1,5 @@
-{% set version = "0.256.1" %}
+{% set version = "0.257.0" %}
 
-# handle undefined magic python variables
-{% set python_min = python_min | default("3.9") %}
 {% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
@@ -11,7 +9,7 @@ package:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 97e5cf0ab24c49565a9a402f980a3e774dd88185033ac730291143aa72bfcd4f
+  sha256: 4f95c432fe6091df7e910e9ab3de2ae6cee80183208b669544ef6129d6b6e916
 
 build:
   # the build number gets reset by the bot
@@ -19,7 +17,7 @@ build:
   noarch: python
   script:
     - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   entry_points:
     - strawberry = strawberry.cli:run
 

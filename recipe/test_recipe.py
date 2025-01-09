@@ -22,6 +22,7 @@ to update those fields in `meta.yaml`.
 If some underlying project data changed e.g. the `path_to-the_tarball`, update
 `TEMPLATE` below and re-run with `--update`.
 """
+
 import os
 import re
 import sys
@@ -48,8 +49,6 @@ MIN_PYTHON = "3.9"
 TEMPLATE = """
 {% set version = "<< version >>" %}
 
-# handle undefined magic python variables
-{% set python_min = python_min | default("<< min_python >>") %}
 {% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
@@ -67,7 +66,7 @@ build:
   noarch: python
   script:
     - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   entry_points:
     - strawberry = strawberry.cli:run
 
