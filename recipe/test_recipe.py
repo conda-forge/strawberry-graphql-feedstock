@@ -42,101 +42,104 @@ DELIMIT = dict(
     variable_start_string="<<",
     variable_end_string=">>",
 )
-
 #: this appears in the global pinnings, but not predictably reachable during build
 MIN_PYTHON = "3.9"
 
 TEMPLATE = """
-{% set version = "<< version >>" %}
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
 
-{% set PYTHON = PYTHON | default("$PYTHON") %}
+context:
+  version: "<< version >>"
 
-package:
+recipe:
   name: strawberry-graphql
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
   sha256: << sha256_sum >>
 
 build:
   # the build number gets reset by the bot
   number: << build_number >>
-  noarch: python
-  script:
-    - {{ PYTHON }} {{ RECIPE_DIR }}/test_recipe.py
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-  entry_points:
-    - strawberry = strawberry.cli:run
-
-requirements:
-  host:
-    - jinja2
-    - pip
-    - poetry >=0.12
-    - poetry-core
-    - python {{ python_min }}
-    - tomli
-  run:
-    - python >={{ python_min }}<% for dep in core_deps %>
-    - << dep >>
-    <%- endfor %>
-    # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
-    - wheel
-
-test:
-  imports:
-    - strawberry
-  commands:
-    - pip check
-  requires:
-    - pip
 
 outputs:
-  - name: strawberry-graphql
+  - package:
+      name: strawberry-graphql
+    build:
+      noarch: python
+      script:
+        - ${{ PYTHON }} ${{ RECIPE_DIR }}/test_recipe.py
+        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+      python:
+        entry_points:
+          - strawberry = strawberry.cli:run
+    requirements:
+      host:
+        - jinja2
+        - pip
+        - poetry >=0.12
+        - poetry-core
+        - python {{ python_min }}
+        - tomli
+      run:
+        - python >={{ python_min }}<% for dep in core_deps %>
+        - << dep >>
+        <%- endfor %>
+        # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
+        - wheel
+    tests:
+      - python:
+          pip_check: true
+          python_version: ${{ python_min }}.*
+          imports: strawberry
 <% for extra, extra_deps in extra_outputs.items() %>
-  - name: strawberry-graphql-with-<< extra >>
+  - package:
+      name: strawberry-graphql-with-<< extra >>
     build:
       noarch: generic
     requirements:
       run:
-        - {{ pin_subpackage("strawberry-graphql", max_pin="x.x.x") }}<% for dep in extra_deps %>
+        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}<% for dep in extra_deps %>
         - << dep >>
         <%- endfor %><% for dep in known_extra_deps.get(extra, []) %>
         - << dep >>
         <%- endfor %>
-    test:
-      imports:
-        - strawberry<% if extra in extra_test_imports %>
-        - << extra_test_imports[extra] >>
-        <%- else %>
-        # TODO: import test for << extra >>
-        <%- endif %>
-      <% if extra not in skip_pip_check or extra in extra_test_commands -%>
-      commands:
-        <% if extra not in skip_pip_check %>- pip check<% endif %><% if extra in extra_test_commands %>
-        - << extra_test_commands[extra] >>
-        <%- endif %>
-      <% endif -%>
-      requires:
-        - pip
+    tests:
+      - python:
+          <% if extra not in skip_pip_check %>pip_check: true<% endif %>
+          python_version: ${{ python_min }}.*
+          imports:
+            - strawberry<% if extra in extra_test_imports %>
+            - << extra_test_imports[extra] >>
+            <%- else %>
+            # TODO: import test for << extra >>
+            <%- endif %>
+      <% if extra in extra_test_commands -%>
+      - requirements:
+          run:
+            - python ${{ python_min }}.*
+        script:
+          - << extra_test_commands[extra] >>
+      # <% endif -%>
     about:
-      home: https://strawberry.rocks
+      homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with << extra >>)
       license: MIT
       license_file: LICENSE
-      dev_url: https://github.com/strawberry-graphql/strawberry
-      doc_url: https://strawberry.rocks/docs
+      repository: https://github.com/strawberry-graphql/strawberry
+      documentation: https://strawberry.rocks/docs
 <% endfor %>
 
 about:
-  home: https://strawberry.rocks
+  homepage: https://strawberry.rocks
   summary: A library for creating GraphQL APIs
   license: MIT
   license_file: LICENSE
-  dev_url: https://github.com/strawberry-graphql/strawberry
-  doc_url: https://strawberry.rocks/docs
+  repository: https://github.com/strawberry-graphql/strawberry
+  documentation: https://strawberry.rocks/docs
 
 extra:
   feedstock-name: strawberry-graphql
@@ -157,18 +160,17 @@ SRC_DIR = Path(os.environ["SRC_DIR"]) if "SRC_DIR" in os.environ else None
 if "RECIPE_DIR" in os.environ:
     WORK_DIR = Path(os.environ["RECIPE_DIR"])
 
-TMPL = [*WORK_DIR.glob("*.j2.*")]
-META = WORK_DIR / "meta.yaml"
-CURRENT_META_TEXT = META.read_text(encoding="utf-8")
+RECIPE = WORK_DIR / "recipe.yaml"
+CURRENT_RECIPE_TEXT = RECIPE.read_text(encoding="utf-8")
 
 #: read the version from what the bot might have updated
 try:
-    VERSION = re.findall(r'set version = "([^"]*)"', CURRENT_META_TEXT)[0].strip()
-    SHA256_SUM = re.findall(r"sha256: ([\S]*)", CURRENT_META_TEXT)[0].strip()
-    BUILD_NUMBER = re.findall(r"number: ([\S]*)", CURRENT_META_TEXT)[0].strip()
+    VERSION = re.findall(r' version: "([^"]*)"', CURRENT_RECIPE_TEXT)[0].strip()
+    SHA256_SUM = re.findall(r" sha256: ([\S]*)", CURRENT_RECIPE_TEXT)[0].strip()
+    BUILD_NUMBER = re.findall(r" number: ([\S]*)", CURRENT_RECIPE_TEXT)[0].strip()
 except Exception as err:
-    print(CURRENT_META_TEXT)
-    print(f"failed to find version info in above {META}")
+    print(CURRENT_RECIPE_TEXT)
+    print(f"failed to find version info in above {RECIPE}")
     print(err)
     sys.exit(1)
 
@@ -333,20 +335,20 @@ def verify_recipe(update=False):
         min_python=MIN_PYTHON,
     )
 
-    old_text = META.read_text(encoding="utf-8")
+    old_text = RECIPE.read_text(encoding="utf-8")
     template = jinja2.Template(TEMPLATE.strip(), **DELIMIT)
     new_text = template.render(**context).strip() + "\n"
 
     if check:
         if new_text.strip() != old_text.strip():
-            print(f"{META} is not up-to-date:")
+            print(f"{RECIPE} is not up-to-date:")
             print(
                 "\n".join(
                     difflib.unified_diff(
                         old_text.splitlines(),
                         new_text.splitlines(),
-                        META.name,
-                        f"{META} (expected)",
+                        RECIPE.name,
+                        f"{RECIPE} (expected)",
                     )
                 )
             )
@@ -354,7 +356,7 @@ def verify_recipe(update=False):
             print("\n\tpython recipe/test_recipe.py --update\n")
             return 1
     else:
-        META.write_text(new_text, encoding="utf-8")
+        RECIPE.write_text(new_text, encoding="utf-8")
 
     return 0
 
