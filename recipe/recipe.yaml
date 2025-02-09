@@ -347,7 +347,7 @@ outputs:
         - chalice 1.*
     tests:
       - python:
-          
+          pip_check: false
           python_version: ${{ python_min }}.*
           imports:
             - strawberry

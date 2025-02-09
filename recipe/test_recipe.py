@@ -109,7 +109,7 @@ outputs:
         <%- endfor %>
     tests:
       - python:
-          <% if extra not in skip_pip_check %>pip_check: true<% endif %>
+          pip_check: << "false" if extra in skip_pip_check else "true" >>
           python_version: ${{ python_min }}.*
           imports:
             - strawberry<% if extra in extra_test_imports %>
