@@ -82,10 +82,10 @@ outputs:
         - pip
         - poetry >=0.12
         - poetry-core
-        - python {{ python_min }}
+        - python ${{ python_min }}.*
         - tomli
       run:
-        - python >={{ python_min }}<% for dep in core_deps %>
+        - python >=${{ python_min }}<% for dep in core_deps %>
         - << dep >>
         <%- endfor %>
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
@@ -117,13 +117,13 @@ outputs:
             <%- else %>
             # TODO: import test for << extra >>
             <%- endif %>
-      <% if extra in extra_test_commands -%>
+      <%- if extra in extra_test_commands %>
       - requirements:
           run:
             - python ${{ python_min }}.*
         script:
           - << extra_test_commands[extra] >>
-      # <% endif -%>
+      <%- endif %>
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with << extra >>)
