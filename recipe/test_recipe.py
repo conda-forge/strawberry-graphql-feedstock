@@ -26,6 +26,7 @@ If some underlying project data changed e.g. the `path_to-the_tarball`, update
 import os
 import re
 import sys
+from packaging.requirements import Requirement
 import tempfile
 import tarfile
 from pathlib import Path
@@ -245,27 +246,14 @@ def is_required(dep, dep_spec):
 
 
 def required_python(python_spec: str):
-    min_py = [*map(int, MIN_PYTHON.split("."))]
-    this_py = [
-        *map(
-            int,
-            python_spec.replace(">", "").replace("<", "").replace("=", "").split("."),
-        )
-    ]
-    if python_spec.startswith(">="):
-        return this_py >= min_py
-    elif python_spec.startswith(">"):
-        return this_py > min_py
-    elif python_spec.startswith("<="):
-        return this_py <= min_py
-    elif python_spec.startswith("<"):
-        return this_py < min_py
-    raise RuntimeError("don't know what to do with python {python_spec}")
+    python_req = Requirement(reqtify("python", {"python": python_spec}))
+    return python_req.specifier.contains(MIN_PYTHON)
 
 
 def reqtify(raw, deps):
     """split dependency into conda requirement"""
     dep = deps[raw]
+
     if not isinstance(dep, str):
         dep = dep["version"]
 
