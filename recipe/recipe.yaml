@@ -39,6 +39,7 @@ outputs:
       run:
         - python >=${{ python_min }}
         - graphql-core >=3.2.0,<3.4.0
+        - packaging >=24
         - python-dateutil 2.*
         - typing-extensions >=4.5.0
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
