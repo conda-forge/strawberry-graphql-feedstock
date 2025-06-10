@@ -23,18 +23,18 @@ If some underlying project data changed e.g. the `path_to-the_tarball`, update
 `TEMPLATE` below and re-run with `--update`.
 """
 
+import difflib
 import os
 import re
 import sys
-from packaging.requirements import Requirement
-import tempfile
 import tarfile
+import tempfile
 from pathlib import Path
 from urllib.request import urlretrieve
-import difflib
 
 import jinja2
 import tomli
+from packaging.requirements import Requirement
 
 DELIMIT = dict(
     # use alternate template delimiters to avoid conflicts
@@ -156,6 +156,9 @@ DEV_URL = "https://github.com/strawberry-graphql/strawberry"
 HERE = Path(__file__).parent
 WORK_DIR = HERE
 SRC_DIR = Path(os.environ["SRC_DIR"]) if "SRC_DIR" in os.environ else None
+PYPROJECT_PATH = (
+    Path(os.environ["PYPROJECT_PATH"]) if "PYPROJECT_PATH" in os.environ else None
+)
 
 #: assume inside conda-build
 if "RECIPE_DIR" in os.environ:
@@ -246,30 +249,40 @@ def is_required(dep, dep_spec):
 
 
 def required_python(python_spec: str):
-    python_req = Requirement(reqtify("python", {"python": python_spec}))
+    python_req = Requirement(reqtify(f"python {python_spec}"))
     return python_req.specifier.contains(MIN_PYTHON)
 
 
-def reqtify(raw, deps):
-    """split dependency into conda requirement"""
-    dep = deps[raw]
+def reqtify(raw: str):
+    """Split dependency into conda requirement"""
+    dep = Requirement(raw)
+    name = f"{dep.name}"
+    spec = f"{dep.specifier}"
 
-    if not isinstance(dep, str):
-        dep = dep["version"]
+    has_tilde = "~" in spec
+    has_caret = "^=" in spec
 
-    if "~" in dep or "^" in dep:
-        op = dep[0]
-        bits = dep[1:].split(".")
-        bits = bits[:1] if op == "^" else bits[:2]
-        dep = ".".join([*bits, "*"])
+    if has_tilde or has_caret:
+        strip_bits = 2 if has_tilde else 3
+        bits = spec[strip_bits:].split(".")
+        min_ = ".".join(bits)
+        max_base, max_last = bits[:-strip_bits], str(int(bits[-strip_bits]) + 1)
+        max_ = ".".join([*max_base, max_last])
+        spec = f">={min_},<{max_}"
 
-    raw = REPLACE_DEPS.get(raw, raw)
+    if "," in spec:
+        spec = ",".join(reversed(sorted(spec.split(","))))
 
-    return f"{raw} {dep}".lower()
+    name = REPLACE_DEPS.get(name, name)
+
+    final = f"{name} {spec}".lower()
+    if final.replace(" ", "") != raw.replace(" ", ""):
+        print("... normalizing\n\t", raw, "\n\t", final)
+    return final
 
 
 def preflight_recipe():
-    """check the recipe first"""
+    """Check the recipe first"""
     print("version:", VERSION)
     print("sha256: ", SHA256_SUM)
     print("number: ", BUILD_NUMBER)
@@ -280,7 +293,11 @@ def preflight_recipe():
 
 
 def get_pyproject_data():
-    """fetch the pyproject.toml data"""
+    """Fetch the pyproject.toml data"""
+    if PYPROJECT_PATH:
+        print(f"reading pyproject.toml from {PYPROJECT_PATH}...")
+        return tomli.loads(PYPROJECT_PATH.read_text(encoding="utf-8"))
+
     if SRC_DIR:
         print(f"reading pyprojec.toml from {TARBALL_URL}...")
         return tomli.loads((SRC_DIR / "pyproject.toml").read_text(encoding="utf-8"))
@@ -291,21 +308,21 @@ def get_pyproject_data():
         tarpath = tdp / Path(TARBALL_URL).name
         urlretrieve(TARBALL_URL, tarpath)
         with tarfile.open(tarpath, "r:gz") as tf:
-            return tomli.load(tf.extractfile(PYPROJECT_TOML))
+            fp = tf.extractfile(PYPROJECT_TOML)
+            assert fp, f"failed to extract {PYPROJECT_TOML}"
+            return tomli.load(fp)
 
 
 def verify_recipe(update=False):
-    """check (or update) a recipe based on the `pyproject.toml` data"""
+    """Check (or update) a recipe based on the `pyproject.toml` data"""
     check = not update
     preflight_recipe()
     pyproject = get_pyproject_data()
-    deps = pyproject["tool"]["poetry"]["dependencies"]
-    core_deps = sorted(
-        [reqtify(d, deps) for d, d_spec in deps.items() if is_required(d, d_spec)]
-    )
-    extras = pyproject["tool"]["poetry"]["extras"]
+    deps = pyproject["project"]["dependencies"]
+    core_deps = sorted([reqtify(d) for d in deps])
+    extras = pyproject["project"]["optional-dependencies"]
     extra_outputs = {
-        extra: sorted([reqtify(d, deps) for d in extra_deps if d in deps])
+        extra: sorted([reqtify(ed) for ed in extra_deps])
         for extra, extra_deps in extras.items()
         if extra not in SKIP_EXTRAS
     }
@@ -340,7 +357,7 @@ def verify_recipe(update=False):
                     )
                 )
             )
-            print("either apply the above patch, or run locally:")
+            print("\neither apply the above patch, or run locally:")
             print("\n\tpython recipe/test_recipe.py --update\n")
             return 1
     else:
