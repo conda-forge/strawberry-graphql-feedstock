@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.273.2"
+  version: "0.273.3"
 
 recipe:
   name: strawberry-graphql
@@ -11,7 +11,7 @@ recipe:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 7d25daddaca8fd05f1d15ffcc1d5fe947c6d174417607b2833ab75c796d6e180
+  sha256: 732ba4b3f6025f9ec3cfaef17aa33e1fbcb0bbbf2b3ebe271cbe0c6b16e13fff
 
 build:
   # the build number gets reset by the bot
