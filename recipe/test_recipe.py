@@ -278,7 +278,7 @@ def reqtify(raw: str):
     final = f"{name} {spec}".lower()
     if final.replace(" ", "") != raw.replace(" ", ""):
         print("... normalizing\n\t", raw, "\n\t", final)
-    return final
+    return final.strip()
 
 
 def preflight_recipe():
