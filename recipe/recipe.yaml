@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.274.2"
+  version: "0.274.3"
 
 recipe:
   name: strawberry-graphql
@@ -11,7 +11,7 @@ recipe:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: bfacf8cef2376c698c9fc4746c309a2b7e3010b9eeeadc7be8a0008272c20511
+  sha256: 4b3b5e8ec66bd7985da5b260e649d26ad4347c2ef0caea3c79c4bd9e851ecd45
 
 build:
   # the build number gets reset by the bot
@@ -104,7 +104,7 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
-        - libcst >=0.4.7,<1.8.0
+        - libcst
         - rich >=12.0.0
     tests:
       - python:
@@ -128,7 +128,7 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
-        - libcst >=0.4.7,<1.8.0
+        - libcst
         - pygments >=2.3,<3
         - python-multipart >=0.0.7
         - rich >=12.0.0
@@ -369,7 +369,7 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
-        - libcst >=0.4.7,<1.8.0
+        - libcst
         - pygments >=2.3,<3
         - rich >=12.0.0
         - typer >=0.7.0
