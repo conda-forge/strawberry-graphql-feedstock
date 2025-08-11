@@ -42,7 +42,7 @@ outputs:
         - lia-web >=0.2.1
         - packaging >=23
         - python-dateutil >=2.7,<3
-        - typing-extensions >=4.5.0
+        - typing_extensions >=4.5.0
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
         - wheel
     tests:
