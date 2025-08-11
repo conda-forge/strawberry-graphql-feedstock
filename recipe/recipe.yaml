@@ -39,6 +39,7 @@ outputs:
       run:
         - python >=${{ python_min }}
         - graphql-core >=3.2.0,<3.4.0
+        - lia-web >=0.2.1
         - packaging >=23
         - python-dateutil >=2.7,<3
         - typing-extensions >=4.5.0
