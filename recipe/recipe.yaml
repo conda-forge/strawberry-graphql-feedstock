@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.278.0"
+  version: "0.278.1"
 
 recipe:
   name: strawberry-graphql
@@ -11,7 +11,7 @@ recipe:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: e3fee9cd107b5b8ca69dd534c1dca6f82e4a9cf44cf46a4d338f42938896521a
+  sha256: ac32e96eb2ea6a67738eefca8226d712e11706b80491e293f3e743455e9c301b
 
 build:
   # the build number gets reset by the bot
@@ -39,9 +39,10 @@ outputs:
       run:
         - python >=${{ python_min }}
         - graphql-core >=3.2.0,<3.4.0
+        - lia-web >=0.2.1
         - packaging >=23
         - python-dateutil >=2.7,<3
-        - typing-extensions >=4.5.0
+        - typing_extensions >=4.5.0
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
         - wheel
     tests:

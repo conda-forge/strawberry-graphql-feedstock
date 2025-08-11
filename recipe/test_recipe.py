@@ -200,7 +200,10 @@ KNOWN_EXTRA_DEPS = {
     "starlite": ["pydantic <2,!=1.10.12  # from pydantic-openapi-schema"],
 }
 
-REPLACE_DEPS = {"graphlib_backport": "graphlib-backport"}
+REPLACE_DEPS = {
+    "graphlib_backport": "graphlib-backport",
+    "typing-extensions": "typing_extensions",
+}
 
 EXTRA_TEST_IMPORTS = {
     "aiohttp": "strawberry.aiohttp",
