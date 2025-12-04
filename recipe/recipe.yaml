@@ -2,7 +2,8 @@
 schema_version: 1
 
 context:
-  version: "0.287.0"
+  version: "0.287.2"
+  python_check_max: "3.14"
 
 recipe:
   name: strawberry-graphql
@@ -11,7 +12,7 @@ recipe:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: 4da748f82684f3dc914fc9ed88184e715903d7fa06248f8f702bbbab55f7ed36
+  sha256: 7d61f03fc44317ba427d78bce6ba0ec8092ffa90ebd41392011641d3908ccb33
 
 build:
   # the build number gets reset by the bot
@@ -41,15 +42,17 @@ outputs:
         - graphql-core >=3.2.0,<3.4.0
         - lia-web >=0.2.1
         - packaging >=23
-        - python-dateutil >=2.7,<3
+        - python-dateutil >=2.7
         - typing_extensions >=4.5.0
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
         - wheel
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports: strawberry
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
 
   - package:
       name: strawberry-graphql-with-aiohttp
@@ -57,15 +60,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - aiohttp >=3.7.4.post0,<4
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.aiohttp
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with aiohttp)
@@ -80,16 +85,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - python-multipart >=0.0.7
         - starlette >=0.18.0
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.asgi
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with asgi)
@@ -104,16 +111,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - libcst
         - rich >=12.0.0
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             # TODO: import test for debug
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with debug)
@@ -128,9 +137,9 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - libcst
-        - pygments >=2.3,<3
+        - pygments >=2.3
         - python-multipart >=0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
@@ -139,11 +148,13 @@ outputs:
         - websockets >=15.0.1,<16
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             # TODO: import test for debug-server
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with debug-server)
@@ -158,16 +169,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2,<4
         - django >=3.2
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.django
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with django)
@@ -182,16 +195,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2,<4
         - channels >=3.0.5
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.channels
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with channels)
@@ -206,15 +221,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - flask >=1.1
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.flask
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with flask)
@@ -229,15 +246,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - quart >=0.19.3
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.quart.views
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with quart)
@@ -252,16 +271,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - opentelemetry-api <2
         - opentelemetry-sdk <2
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.extensions.tracing
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with opentelemetry)
@@ -276,15 +297,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - pydantic >1.6.1
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.experimental.pydantic
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with pydantic)
@@ -299,15 +322,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - sanic >=20.12.2
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.sanic
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with sanic)
@@ -322,16 +347,18 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - fastapi >=0.65.2
         - python-multipart >=0.0.7
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.fastapi
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with fastapi)
@@ -346,15 +373,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - chalice >=1.22,<2
     tests:
       - python:
-          pip_check: false
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.chalice
+          pip_check: false
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with chalice)
@@ -369,7 +398,7 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - libcst
         - pygments >=2.3,<3
         - python-multipart >=0.0.7
@@ -380,11 +409,13 @@ outputs:
         - websockets >=15.0.1,<16
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.cli
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
       - requirements:
           run:
             - python ${{ python_min }}.*
@@ -404,15 +435,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - litestar >=2
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.litestar
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with litestar)
@@ -427,15 +460,17 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - pyinstrument >=4.0.0
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry
             - strawberry.extensions.pyinstrument
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
     about:
       homepage: https://strawberry.rocks
       summary: A library for creating GraphQL APIs (with pyinstrument)
@@ -443,7 +478,6 @@ outputs:
       license_file: LICENSE
       repository: https://github.com/strawberry-graphql/strawberry
       documentation: https://strawberry.rocks/docs
-
 
 about:
   homepage: https://strawberry.rocks
