@@ -41,7 +41,7 @@ outputs:
         - graphql-core >=3.2.0,<3.4.0
         - lia-web >=0.2.1
         - packaging >=23
-        - python-dateutil >=2.7,<3
+        - python-dateutil >=2.7
         - typing_extensions >=4.5.0
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
         - wheel
@@ -130,7 +130,7 @@ outputs:
       run:
         - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}
         - libcst
-        - pygments >=2.3,<3
+        - pygments >=2.3
         - python-multipart >=0.0.7
         - rich >=12.0.0
         - starlette >=0.18.0
