@@ -44,7 +44,12 @@ DELIMIT = dict(
     variable_end_string=">>",
 )
 #: this appears in the global pinnings, but not predictably reachable during build
-MIN_PYTHON = "3.9"
+MIN_PYTHON = "3.10"
+
+#: custom maximum python (if not python_check_max) by [extra]
+MAX_PYTHON = {
+    # "chalice": "3.13",
+}
 
 TEMPLATE = """
 # yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
@@ -52,6 +57,7 @@ schema_version: 1
 
 context:
   version: "<< version >>"
+  python_check_max: "3.14"
 
 recipe:
   name: strawberry-graphql
@@ -93,9 +99,11 @@ outputs:
         - wheel
     tests:
       - python:
-          pip_check: true
-          python_version: ${{ python_min }}.*
           imports: strawberry
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
 <% for extra, extra_deps in extra_outputs.items() %>
   - package:
       name: strawberry-graphql-with-<< extra >>
@@ -103,21 +111,24 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("strawberry-graphql", upper_bound="x.x.x") }}<% for dep in extra_deps %>
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}<% for dep in extra_deps %>
         - << dep >>
         <%- endfor %><% for dep in known_extra_deps.get(extra, []) %>
         - << dep >>
         <%- endfor %>
     tests:
       - python:
-          pip_check: << "false" if extra in skip_pip_check else "true" >>
-          python_version: ${{ python_min }}.*
           imports:
             - strawberry<% if extra in extra_test_imports %>
             - << extra_test_imports[extra] >>
             <%- else %>
             # TODO: import test for << extra >>
             <%- endif %>
+          pip_check: << "false" if extra in skip_pip_check else "true" >>
+          python_version:
+            - ${{ python_min }}.*
+            - <% if extra in max_python %><< max_python[extra] >>.*
+              <%- else -%>${{ python_check_max }}.*<% endif %>
       <%- if extra in extra_test_commands %>
       - requirements:
           run:
@@ -133,7 +144,6 @@ outputs:
       repository: https://github.com/strawberry-graphql/strawberry
       documentation: https://strawberry.rocks/docs
 <% endfor %>
-
 about:
   homepage: https://strawberry.rocks
   summary: A library for creating GraphQL APIs
@@ -221,8 +231,10 @@ EXTRA_TEST_IMPORTS = {
     "quart": "strawberry.quart.views",
     "sanic": "strawberry.sanic",
     "starlite": "strawberry.starlite",
-    # TODO: needs env var
-    # "debug-server": "strawberry.cli.debug_server",
+    # unsure, not really documented
+    # "debug": "",
+    # deprecated/needs env var
+    # "debug-server": "",
 }
 
 EXTRA_TEST_COMMANDS = {"cli": "strawberry --help"}
@@ -340,7 +352,7 @@ def verify_recipe(update=False):
         extra_test_imports=EXTRA_TEST_IMPORTS,
         extra_test_commands=EXTRA_TEST_COMMANDS,
         skip_pip_check=SKIP_PIP_CHECK,
-        min_python=MIN_PYTHON,
+        max_python=MAX_PYTHON,
     )
 
     old_text = RECIPE.read_text(encoding="utf-8")
