@@ -87,10 +87,9 @@ outputs:
       host:
         - jinja2
         - pip
-        - poetry >=0.12
-        - poetry-core
         - python ${{ python_min }}.*
         - tomli
+        - uv-build >=0.11,<0.12
       run:
         - python >=${{ python_min }}<% for dep in core_deps %>
         - << dep >>
