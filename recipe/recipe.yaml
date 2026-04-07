@@ -72,12 +72,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with aiohttp)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [aiohttp])
 
   - package:
       name: strawberry-graphql-with-asgi
@@ -98,12 +93,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with asgi)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [asgi])
 
   - package:
       name: strawberry-graphql-with-debug
@@ -124,12 +114,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with debug)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [debug])
 
   - package:
       name: strawberry-graphql-with-django
@@ -150,12 +135,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with django)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [django])
 
   - package:
       name: strawberry-graphql-with-channels
@@ -176,12 +156,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with channels)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [channels])
 
   - package:
       name: strawberry-graphql-with-flask
@@ -201,12 +176,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with flask)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [flask])
 
   - package:
       name: strawberry-graphql-with-quart
@@ -226,12 +196,27 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with quart)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [quart])
+
+  - package:
+      name: strawberry-graphql-with-apollo-federation
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
+        - protobuf >=3.20
+    tests:
+      - python:
+          imports:
+            - strawberry
+            - strawberry.extensions.tracing.apollo_federation
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+    about:
+      summary: A library for creating GraphQL APIs (with [apollo-federation])
 
   - package:
       name: strawberry-graphql-with-opentelemetry
@@ -252,12 +237,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with opentelemetry)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [opentelemetry])
 
   - package:
       name: strawberry-graphql-with-pydantic
@@ -277,12 +257,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with pydantic)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [pydantic])
 
   - package:
       name: strawberry-graphql-with-sanic
@@ -302,12 +277,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with sanic)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [sanic])
 
   - package:
       name: strawberry-graphql-with-fastapi
@@ -328,12 +298,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with fastapi)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [fastapi])
 
   - package:
       name: strawberry-graphql-with-chalice
@@ -353,12 +318,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with chalice)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [chalice])
 
   - package:
       name: strawberry-graphql-with-cli
@@ -390,12 +350,7 @@ outputs:
         script:
           - strawberry --help
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with cli)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [cli])
 
   - package:
       name: strawberry-graphql-with-litestar
@@ -415,12 +370,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with litestar)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [litestar])
 
   - package:
       name: strawberry-graphql-with-pyinstrument
@@ -440,15 +390,10 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with pyinstrument)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [pyinstrument])
 
 about:
-  homepage: https://strawberry.rocks
+  homepage: https://pypi.org/project/strawberry-graphql
   summary: A library for creating GraphQL APIs
   license: MIT
   license_file: LICENSE

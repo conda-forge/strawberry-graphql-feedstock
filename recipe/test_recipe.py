@@ -137,15 +137,10 @@ outputs:
           - << extra_test_commands[extra] >>
       <%- endif %>
     about:
-      homepage: https://strawberry.rocks
-      summary: A library for creating GraphQL APIs (with << extra >>)
-      license: MIT
-      license_file: LICENSE
-      repository: https://github.com/strawberry-graphql/strawberry
-      documentation: https://strawberry.rocks/docs
+      summary: A library for creating GraphQL APIs (with [<< extra >>])
 <% endfor %>
 about:
-  homepage: https://strawberry.rocks
+  homepage: https://pypi.org/project/strawberry-graphql
   summary: A library for creating GraphQL APIs
   license: MIT
   license_file: LICENSE
@@ -217,6 +212,7 @@ REPLACE_DEPS = {
 
 EXTRA_TEST_IMPORTS = {
     "aiohttp": "strawberry.aiohttp",
+    "apollo-federation": "strawberry.extensions.tracing.apollo_federation",
     "asgi": "strawberry.asgi",
     "chalice": "strawberry.chalice",
     "channels": "strawberry.channels",
