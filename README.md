@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/strawberry-grap
 About strawberry-graphql
 ------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
@@ -20,11 +20,24 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-aiohttp
 -------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with aiohttp)
+Summary: A library for creating GraphQL APIs (with [aiohttp])
+
+Development: https://github.com/strawberry-graphql/strawberry
+
+Documentation: https://strawberry.rocks/docs
+
+About strawberry-graphql-with-apollo-federation
+-----------------------------------------------
+
+Home: https://pypi.org/project/strawberry-graphql
+
+Package license: MIT
+
+Summary: A library for creating GraphQL APIs (with [apollo-federation])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -33,11 +46,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-asgi
 ----------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with asgi)
+Summary: A library for creating GraphQL APIs (with [asgi])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -46,11 +59,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-chalice
 -------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with chalice)
+Summary: A library for creating GraphQL APIs (with [chalice])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -59,11 +72,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-channels
 --------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with channels)
+Summary: A library for creating GraphQL APIs (with [channels])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -72,11 +85,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-cli
 ---------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with cli)
+Summary: A library for creating GraphQL APIs (with [cli])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -85,11 +98,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-debug
 -----------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with debug)
+Summary: A library for creating GraphQL APIs (with [debug])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -98,11 +111,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-django
 ------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with django)
+Summary: A library for creating GraphQL APIs (with [django])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -111,11 +124,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-fastapi
 -------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with fastapi)
+Summary: A library for creating GraphQL APIs (with [fastapi])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -124,11 +137,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-flask
 -----------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with flask)
+Summary: A library for creating GraphQL APIs (with [flask])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -137,11 +150,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-litestar
 --------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with litestar)
+Summary: A library for creating GraphQL APIs (with [litestar])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -150,11 +163,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-opentelemetry
 -------------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with opentelemetry)
+Summary: A library for creating GraphQL APIs (with [opentelemetry])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -163,11 +176,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-pydantic
 --------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with pydantic)
+Summary: A library for creating GraphQL APIs (with [pydantic])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -176,11 +189,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-pyinstrument
 ------------------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with pyinstrument)
+Summary: A library for creating GraphQL APIs (with [pyinstrument])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -189,11 +202,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-quart
 -----------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with quart)
+Summary: A library for creating GraphQL APIs (with [quart])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -202,11 +215,11 @@ Documentation: https://strawberry.rocks/docs
 About strawberry-graphql-with-sanic
 -----------------------------------
 
-Home: https://strawberry.rocks/
+Home: https://pypi.org/project/strawberry-graphql
 
 Package license: MIT
 
-Summary: A library for creating GraphQL APIs (with sanic)
+Summary: A library for creating GraphQL APIs (with [sanic])
 
 Development: https://github.com/strawberry-graphql/strawberry
 
@@ -231,6 +244,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql.svg)](https://anaconda.org/conda-forge/strawberry-graphql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql.svg)](https://anaconda.org/conda-forge/strawberry-graphql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql.svg)](https://anaconda.org/conda-forge/strawberry-graphql) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--aiohttp-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-aiohttp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-aiohttp.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-aiohttp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-aiohttp.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-aiohttp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-aiohttp.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-aiohttp) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--apollo--federation-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-apollo-federation) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-apollo-federation.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-apollo-federation) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-apollo-federation.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-apollo-federation) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-apollo-federation.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-apollo-federation) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--asgi-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-asgi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-asgi.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-asgi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-asgi.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-asgi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-asgi.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-asgi) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--chalice-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-chalice) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-chalice.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-chalice) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-chalice.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-chalice) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-chalice.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-chalice) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-strawberry--graphql--with--channels-green.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-channels) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/strawberry-graphql-with-channels.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-channels) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/strawberry-graphql-with-channels.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-channels) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/strawberry-graphql-with-channels.svg)](https://anaconda.org/conda-forge/strawberry-graphql-with-channels) |
@@ -256,16 +270,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `strawberry-graphql, strawberry-graphql-with-aiohttp, strawberry-graphql-with-asgi, strawberry-graphql-with-chalice, strawberry-graphql-with-channels, strawberry-graphql-with-cli, strawberry-graphql-with-debug, strawberry-graphql-with-django, strawberry-graphql-with-fastapi, strawberry-graphql-with-flask, strawberry-graphql-with-litestar, strawberry-graphql-with-opentelemetry, strawberry-graphql-with-pydantic, strawberry-graphql-with-pyinstrument, strawberry-graphql-with-quart, strawberry-graphql-with-sanic` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `strawberry-graphql, strawberry-graphql-with-aiohttp, strawberry-graphql-with-apollo-federation, strawberry-graphql-with-asgi, strawberry-graphql-with-chalice, strawberry-graphql-with-channels, strawberry-graphql-with-cli, strawberry-graphql-with-debug, strawberry-graphql-with-django, strawberry-graphql-with-fastapi, strawberry-graphql-with-flask, strawberry-graphql-with-litestar, strawberry-graphql-with-opentelemetry, strawberry-graphql-with-pydantic, strawberry-graphql-with-pyinstrument, strawberry-graphql-with-quart, strawberry-graphql-with-sanic` can be installed with `conda`:
 
 ```
-conda install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
+conda install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
 ```
 
 or with `mamba`:
 
 ```
-mamba install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
+mamba install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
 ```
 
 It is possible to list all of the versions of `strawberry-graphql` available on your platform with `conda`:
