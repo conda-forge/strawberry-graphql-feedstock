@@ -378,6 +378,3 @@ Feedstock Maintainers
 * [@cshaley](https://github.com/cshaley/)
 * [@thewchan](https://github.com/thewchan/)
 
-
-<!-- dummy commit to enable rerendering -->
-
