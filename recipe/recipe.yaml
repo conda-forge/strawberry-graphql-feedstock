@@ -123,7 +123,7 @@ outputs:
       run:
         - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2
-        - django >=3.2
+        - django >=5.2
     tests:
       - python:
           imports:
@@ -144,7 +144,8 @@ outputs:
       run:
         - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2
-        - channels >=3.0.5
+        - channels >=4.0.0
+        - django >=5.2
     tests:
       - python:
           imports:
