@@ -272,31 +272,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `strawberry-graphql, strawberry-graphql-with-aiohttp, strawberry-graphql-with-apollo-federation, strawberry-graphql-with-asgi, strawberry-graphql-with-chalice, strawberry-graphql-with-channels, strawberry-graphql-with-cli, strawberry-graphql-with-debug, strawberry-graphql-with-django, strawberry-graphql-with-fastapi, strawberry-graphql-with-flask, strawberry-graphql-with-litestar, strawberry-graphql-with-opentelemetry, strawberry-graphql-with-pydantic, strawberry-graphql-with-pyinstrument, strawberry-graphql-with-quart, strawberry-graphql-with-sanic` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
 ```
 
-It is possible to list all of the versions of `strawberry-graphql` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
+# for installing globally
+pixi global install strawberry-graphql strawberry-graphql-with-aiohttp strawberry-graphql-with-apollo-federation strawberry-graphql-with-asgi strawberry-graphql-with-chalice strawberry-graphql-with-channels strawberry-graphql-with-cli strawberry-graphql-with-debug strawberry-graphql-with-django strawberry-graphql-with-fastapi strawberry-graphql-with-flask strawberry-graphql-with-litestar strawberry-graphql-with-opentelemetry strawberry-graphql-with-pydantic strawberry-graphql-with-pyinstrument strawberry-graphql-with-quart strawberry-graphql-with-sanic
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `strawberry-graphql` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search strawberry-graphql --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search strawberry-graphql --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search strawberry-graphql --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -308,6 +350,8 @@ mamba repoquery whoneeds strawberry-graphql --channel conda-forge
 # List dependencies of `strawberry-graphql`:
 mamba repoquery depends strawberry-graphql --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge
