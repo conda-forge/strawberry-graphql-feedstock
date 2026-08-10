@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.323.2"
+  version: "0.324.0"
   python_check_max: "3.14"
 
 recipe:
@@ -12,7 +12,7 @@ recipe:
 source:
   url: https://pypi.org/packages/source/s/strawberry-graphql/strawberry_graphql-${{ version }}.tar.gz
   # the SHA256 gets updated by the bot
-  sha256: e3ba1f24596fc5e943a13dc75c8d071befc7c9f471c3b1a5def39ecb483a2f62
+  sha256: 4eb6decf0c33524374f24e07ff6d1915da26655a49fa6f656544c293404e2d35
 
 build:
   # the build number gets reset by the bot
@@ -123,7 +123,7 @@ outputs:
       run:
         - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2
-        - django >=3.2
+        - django >=5.2
     tests:
       - python:
           imports:
@@ -144,7 +144,8 @@ outputs:
       run:
         - ${{ pin_subpackage("strawberry-graphql", exact=True) }}
         - asgiref >=3.2
-        - channels >=3.0.5
+        - channels >=4.0.0
+        - django >=5.2
     tests:
       - python:
           imports:
