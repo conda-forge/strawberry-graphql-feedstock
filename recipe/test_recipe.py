@@ -79,7 +79,7 @@ outputs:
       noarch: python
       script:
         - ${{ PYTHON }} ${{ RECIPE_DIR }}/test_recipe.py
-        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
       python:
         entry_points:
           - strawberry = strawberry.cli:run
@@ -97,6 +97,11 @@ outputs:
         # fix after https://github.com/conda-forge/astunparse-feedstock/pull/15
         - wheel
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - strawberry/**
+            - strawberry-${{ version }}.dist-info/**
       - python:
           imports: strawberry
           pip_check: true
