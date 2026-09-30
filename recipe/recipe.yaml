@@ -50,7 +50,7 @@ outputs:
           strict: true
           site_packages:
             - strawberry/**
-            - strawberry-${{ version }}.dist-info/**
+            - strawberry_graphql-${{ version }}.dist-info/**
       - python:
           imports: strawberry
           pip_check: true
